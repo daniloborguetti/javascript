@@ -1,0 +1,12 @@
+function() {
+  var products = {{dlv até a matriz de dados}};
+  var tam = products.length
+  var TotalValue= []
+  var indice=0
+  while (tam !=0){
+        TotalValue.push(products[indice].id)
+        var tam=tam-1
+        var indice=indice+1
+      }  
+  return TotalValue;
+}
