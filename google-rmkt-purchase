@@ -1,0 +1,9 @@
+function() {
+  var productsId = {{variável de camada de dados}};
+  return ecommerceProductData = productsId.map(function(id) {
+    return{
+      id: id,  // ID is required.
+      google_business_vertical: 'retail',    
+    }
+  });
+}
