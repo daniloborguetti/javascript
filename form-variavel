@@ -1,0 +1,4 @@
+function () {
+  var name =  document.querySelector ('[name="variavel"]');
+  return name.value;
+}
