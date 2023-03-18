@@ -1,0 +1,14 @@
+function() {
+  var ecommerceProductData = [
+    {
+      'item_name': '{{[DLV] nameProduct}}',
+      'item_id': '{{[DLV] idProduct}}',  // ID is required.
+      'item_brand': '{{[DLV] brand}}',
+      'item_category': '{{[DLV] category}}',
+      'price': '{{[DLV] price}}',
+      // Rest of the product data should follow the data layer syntax.
+    },
+    // Multiple products may be included.
+  ];
+  return ecommerceProductData;
+}
