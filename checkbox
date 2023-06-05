@@ -1,0 +1,11 @@
+function() {
+  // Obtém a referência para a caixa de seleção pelo ID
+  var checkbox = document.getElementById("checkboxid");
+
+  // Verifica se a caixa de seleção está marcada ou não
+  if (checkbox.checked) {
+    return "checked";
+  } else {
+    return "not checked";
+  }
+}
