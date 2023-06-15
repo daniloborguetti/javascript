@@ -1,12 +1,8 @@
 function() {
-  var products = {{dlv até a matriz de dados}};
-  var tam = products.length
-  var TotalValue=0
-  var indice=0
-  while (tam !=0){
-        TotalValue=TotalValue+products[indice].quantity
-        var tam=tam-1
-        var indice=indice+1
-      }  
-  return TotalValue;
+total_produtos = 0;
+data = {{dlv até a matriz de dados}};
+$.each(data, function(index) {
+total_produtos += parseFloat(data[index].quantity);
+});
+return total_produtos;
 }
