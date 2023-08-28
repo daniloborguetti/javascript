@@ -1,0 +1,13 @@
+function formatarNumeroTelefone() {
+  var phonenumber = document.querySelector('[id="form-field-mobile"]').value;
+
+  // Remove caracteres não numéricos e espaços
+  var numeroLimpo = phonenumber.replace(/\D/g, '');
+
+  // Adiciona o código do país 61 (Austrália) se necessário
+  if (!numeroLimpo.startsWith('61')) {
+    numeroLimpo = '61' + numeroLimpo;
+  }
+
+  return numeroLimpo;
+}
