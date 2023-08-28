@@ -4,9 +4,9 @@ function formatarNumeroTelefone() {
   // Remove caracteres não numéricos e espaços
   var numeroLimpo = phonenumber.replace(/\D/g, '');
 
-  // Adiciona o código do país 61 (Austrália) se necessário
-  if (!numeroLimpo.startsWith('61')) {
-    numeroLimpo = '61' + numeroLimpo;
+  // Adiciona o código do país 55 (Brasil) se necessário
+  if (!numeroLimpo.startsWith('55')) {
+    numeroLimpo = '55' + numeroLimpo;
   }
 
   return numeroLimpo;
