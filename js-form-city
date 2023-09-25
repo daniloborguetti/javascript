@@ -1,6 +1,17 @@
-function () {
-  var city =  document.querySelector ('[id="shippingAddress.city"]');
-  return city.value;
-  var parsed = str.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
-  return parsed;
+function formatCity() {
+  var cityElement = document.querySelector('[id="shippingAddress.city"]');
+  
+  if (cityElement) {
+    var cityValue = cityElement.value;
+    
+    // Remove acentuação
+    var parsed = cityValue.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+    
+    // Converte para letras minúsculas e remove espaços
+    parsed = parsed.toLowerCase().replace(/\s/g, '');
+    
+    return parsed;
+  }
+  
+  return null; // Retorna null se o elemento não for encontrado
 }
