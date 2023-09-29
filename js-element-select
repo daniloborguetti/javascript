@@ -1,0 +1,5 @@
+function () {
+   var e = document.getElementById("idEstado");
+   var str = e.options[e.selectedIndex].text;
+   return str;
+}
