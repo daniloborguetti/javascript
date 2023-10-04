@@ -1,5 +1,5 @@
 function formatarDataNascimento() {
-  var birthdate = document.querySelector('input[id="nascimento"]').value;
+  var birthdate = document.querySelector('input[id="birthdate"]').value;
 
   var partes = birthdate.split('/');
   if (partes.length !== 3) {
