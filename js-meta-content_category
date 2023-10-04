@@ -1,4 +1,4 @@
 function() {
-  var products = {{dlv até a matriz de dados}};
-  return products.reduce(function(arr, prod) { return arr.concat(prod.category); }, []).join();
+  var products = {{dlv matriz items}};
+  return products.reduce(function(arr, prod) { return arr.concat(prod.item_category); }, []).join();
 }
