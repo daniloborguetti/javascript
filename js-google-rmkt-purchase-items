@@ -1,5 +1,5 @@
 function() {
-  var productsId = {{dlv matriz items}};
+  var productsId = {{js-google-content_ids}};
   return ecommerceProductData = productsId.map(function(id) {
     return{
       id: item_id,  // ID is required.
