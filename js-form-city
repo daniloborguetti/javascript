@@ -1,5 +1,5 @@
 function formatCity() {
-  var cityElement = document.querySelector('[id="shippingAddress.city"]');
+  var cityElement = document.querySelector('[id="city"]');
   
   if (cityElement) {
     var cityValue = cityElement.value;
