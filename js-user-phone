@@ -1,5 +1,5 @@
 function formatarNumeroTelefone() {
-  var phonenumber = {{dlv matriz}};
+  var phonenumber = {{dlv phone}};
 
   // Remove caracteres não numéricos e espaços
   var numeroLimpo = phonenumber.replace(/\D/g, '');
