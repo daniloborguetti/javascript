@@ -1,5 +1,5 @@
 function formatarNumeroTelefone() {
-  var phonenumber = document.querySelector('[id="111"]').value;
+  var phonenumber = document.querySelector('[id="phone"]').value;
 
   // Remove caracteres não numéricos e espaços
   var numeroLimpo = phonenumber.replace(/\D/g, '');
