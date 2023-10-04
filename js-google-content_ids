@@ -4,7 +4,7 @@ function() {
   var TotalValue= []
   var indice=0
   while (tam !=0){
-        TotalValue.push(products[indice].id)
+        TotalValue.push(products[indice].item_id)
         var tam=tam-1
         var indice=indice+1
       }  
