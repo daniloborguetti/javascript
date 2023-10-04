@@ -1,6 +1,6 @@
 function() {
 total_produtos = 0;
-data = {{dlv até a matriz de dados}};
+data = {{dlv matriz items}};
 $.each(data, function(index) {
 total_produtos += parseFloat(data[index].quantity);
 });
