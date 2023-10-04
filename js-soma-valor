@@ -1,5 +1,5 @@
 function() {
-  var products = {{dlv até a matriz de dados}};
+  var products = {{dlv matriz items}};
   var tam = products.length
   var TotalValue=0
   var indice=0
