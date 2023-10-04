@@ -1,7 +1,7 @@
 function(){
-  return {{dlv até a matriz de dados}}.map(function(product){
+  return {{dlv matriz items}}.map(function(product){
     return {
-      id: product.id,
+      id: product.item_id,
       quantity: product.quantity,
     }
     })
