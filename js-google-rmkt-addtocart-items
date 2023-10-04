@@ -1,7 +1,7 @@
 function() {
   var ecommerceProductData = [
     {
-      'id': '{{[variável de camada de dados }}',  // ID is required.
+      'id': '{{dlv matriz items}}',  // ID is required.
       'google_business_vertical': 'retail',	
       // Rest of the product data should follow the data layer syntax.
     },
