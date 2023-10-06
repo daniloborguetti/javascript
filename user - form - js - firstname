@@ -1,0 +1,4 @@
+function () {
+  var firstname =  document.querySelector ('[id="form-field-firstname"]');
+  return firstname.value;
+}
