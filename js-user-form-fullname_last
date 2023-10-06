@@ -1,5 +1,5 @@
 function getLastname() {
-  var nameField = document.querySelector('[id="last_name"]');
+  var nameField = document.querySelector('[id="fullname"]');
   var name = nameField.value;
  
   // Dividindo o nome em partes usando o espaço em branco para separar
