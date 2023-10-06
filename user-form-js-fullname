@@ -1,5 +1,5 @@
 function getName() {
-  var nameField = document.querySelector('[id="first_name"]');
+  var nameField = document.querySelector('[id="f"]');
   var name = nameField.value;
  
   // Dividindo o nome em partes usando o espaço em branco para separar
