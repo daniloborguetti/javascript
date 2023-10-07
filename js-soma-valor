@@ -1,10 +1,10 @@
 function() {
-  var products = {{dlv matriz items}};
+  var products = {{dlv matriz items}}; // Substitua pela variável que abre a matriz items
   var tam = products.length
   var TotalValue=0
   var indice=0
   while (tam !=0){
-        TotalValue=TotalValue+(products[indice].price*products[indice].quantity)
+        TotalValue=TotalValue+(products[indice].price*products[indice].quantity) // Verifique o formato do parâmetro quantity
         var tam=tam-1
         var indice=indice+1
       }  
