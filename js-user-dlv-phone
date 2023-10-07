@@ -1,5 +1,5 @@
 function formatarNumeroTelefone() {
-  var phonenumber = {{dlv phone}};
+  var phonenumber = {{dlv phone}}; // Substitua pela variável da sua Camada de Dados
 
   // Remove caracteres não numéricos e espaços
   var numeroLimpo = phonenumber.replace(/\D/g, '');
