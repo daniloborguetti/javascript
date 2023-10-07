@@ -1,10 +1,10 @@
 function() {
-  var products = {{dlv matriz items}};
+  var products = {{dlv matriz items}}; // Substitua pela variável que abre a matriz de items
   var tam = products.length
   var TotalValue= []
   var indice=0
   while (tam !=0){
-        TotalValue.push(products[indice].item_id)
+        TotalValue.push(products[indice].item_id) // Verifique o formato do parâmetro de id
         var tam=tam-1
         var indice=indice+1
       }  
