@@ -1,5 +1,5 @@
 function formatarCEP() {
-  var name = document.querySelector('[id="postcode"]');
+  var name = document.querySelector('[id="postcode"]'); // Substitua pela variável do seu formulário
   var zipcode = name.value;
 
   // Extrai os primeiros 5 caracteres numéricos
