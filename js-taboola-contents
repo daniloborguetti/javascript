@@ -1,9 +1,9 @@
 function(){
-  return {{dlv matriz items}}.map(function(product){
+  return {{dlv matriz items}}.map(function(product){ // Substitua pela variável que abre a matriz items
     return {
-      productId: product.item_id,
-      quantity: product.quantity,
-      price: product.item_price,
+      productId: product.item_id, // Verifique o formato do parâmetro id
+      quantity: product.quantity, // Verifique o formato do parâmetro quantity
+      price: product.price, // Verifique o formato do parâmetro price
     }
     })
 }
