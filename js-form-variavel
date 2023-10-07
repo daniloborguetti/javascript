@@ -1,4 +1,4 @@
 function () {
-  var name =  document.querySelector ('[id="variavel"]');
+  var name =  document.querySelector ('[id="variavel"]'); // Substitua pela variável do seu formulário
   return name.value;
 }
