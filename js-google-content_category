@@ -1,4 +1,4 @@
 function() {
-  var products = {{dlv matriz items}}; // Substitua pela variável que abre a matriz de items
+  var products = {{dlv matriz items}}; // Substitua pela variável que abre a matriz items
   return products.reduce(function(arr, prod) { return arr.concat(prod.item_category); }, []).join(); // Verifique o formato do parâmetro category
 }
