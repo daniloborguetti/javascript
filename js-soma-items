@@ -1,8 +1,17 @@
 function() {
-total_produtos = 0;
-data = {{dlv matriz items}};
-$.each(data, function(index) {
-total_produtos += parseFloat(data[index].quantity);
-});
-return total_produtos;
+  var dataLayer = {{dlv matriz items}}; // Substitua pelo nome da sua variável
+
+  var totalQuantity = 0;
+
+  for (var key in dataLayer) {
+    if (dataLayer.hasOwnProperty(key)) {
+      var item = dataLayer[key];
+      var quantity = item.quantity ? parseInt(item.quantity) : 0;
+      var itemId = item.item_id;
+
+      totalQuantity += (quantity > 0 ? quantity : (itemId ? 1 : 0));
+    }
+  }
+
+  return totalQuantity;
 }
