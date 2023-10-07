@@ -1,5 +1,5 @@
 function () {
-   var e = document.getElementById("idEstado");
+   var e = document.getElementById("idEstado"); // Substitua pela variável do seu formulário
    var str = e.options[e.selectedIndex].text;
    return str;
 }
