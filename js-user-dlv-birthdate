@@ -1,7 +1,7 @@
 function formatarDataNascimento() {
   var birthdate = {{birthdate}}; // Substitua pela variável da sua Camada de Dados
 
-  var partes = birthdate.split('/');
+  var partes = birthdate.split('/'); // Substitua pelo caracterer que separa a data
   if (partes.length !== 3) {
     return 'Data inválida';
   }
