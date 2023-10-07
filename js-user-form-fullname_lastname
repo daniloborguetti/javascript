@@ -1,5 +1,5 @@
 function getLastname() {
-  var nameField = document.querySelector('[id="fullname"]');
+  var nameField = document.querySelector('[id="fullname"]'); // Substitua pela variável do seu formulário
   var name = nameField.value;
  
   // Dividindo o nome em partes usando o espaço em branco para separar
