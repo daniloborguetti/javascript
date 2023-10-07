@@ -1,6 +1,6 @@
 function () {
-  var primeiro =  document.querySelectorAll ('[id="variavel"]')[0].value;
-  var segundo =  document.querySelectorAll ('[id="variavel"]')[1].value;
+  var primeiro =  document.querySelectorAll ('[id="variavel"]')[0].value; // Substitua pela variável do seu formulário
+  var segundo =  document.querySelectorAll ('[id="variavel"]')[1].value; // Substitua pela variável do seu formulário
   if (primeiro) {var email = primeiro}
     else {var email = segundo};
   
