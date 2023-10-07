@@ -1,0 +1,13 @@
+function formatarCEP() {
+  var name = {{dlv zipcode}}; // Substitua pela variável da sua Camada de Dados
+  var zipcode = name.value;
+
+  // Extrai os primeiros 5 caracteres numéricos
+  var zipcodeFormated = zipcode.match(/\d{5}/);
+
+  if (zipcode) {
+    return zipcodeFormated[0]; // Retorna os primeiros 5 caracteres numéricos
+  } else {
+    return ""; // Retorna uma string vazia se não encontrar números
+  }
+}
