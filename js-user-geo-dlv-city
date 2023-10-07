@@ -1,5 +1,5 @@
 function formatCity() {
-  var cityElement = {{dlv city}};
+  var cityElement = {{dlv city}}; // Substitua pela variável da sua Camada de Dados
   
   if (cityElement) {
     var cityValue = cityElement;
