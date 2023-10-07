@@ -1,8 +1,8 @@
 function() {
-  var productsId = {{js-google-content_ids}};
+  var productsId = {{js-google-content_ids}}; // Substitua pela variável google-content_ids
   return ecommerceProductData = productsId.map(function(id) {
     return{
-      id: item_id,  // ID is required.
+      id: item_id,  // Verifique o formato do parâmetro id
       google_business_vertical: 'retail',    
     }
   });
