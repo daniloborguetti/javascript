@@ -1,4 +1,4 @@
 function () {
-  var lastname =  document.querySelector ('[id="form-field-lastname"]');
+  var lastname =  document.querySelector ('[id="lastname"]'); // Substitua pela variável do seu formulário
   return lastname.value;
 }
