@@ -1,0 +1,16 @@
+function getLastname() {
+  var nameField = {{dlv-fullname}}; // Substitua pela variável do seu formulário
+  var name = nameField.value;
+ 
+  // Dividindo o nome em partes usando o espaço em branco para separar
+  var names = name.split(' ');
+ 
+  // Verificando se há mais de um nome
+  if (names.length > 1) {
+    // Retorne o último nome
+    return names[names.length - 1];
+  } else {
+    // Se houver apenas um nome, retorne uma string vazia
+    return '';
+  }
+}
