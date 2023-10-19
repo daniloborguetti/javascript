@@ -5,7 +5,7 @@ function() {
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoPais = {{dlv-country}}; // Substitua '#seuCampoQuerySelector' pelo seletor correto
+  var campoPais = {{dlv-country}}; // Substitua pela variável da sua Camada de Dados
 
   if (campoPais) {
     var paisSelecionado = campoPais.value;
