@@ -31,7 +31,7 @@ function() {
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoEstado = {{dlv-state}}; // Substitua pela variável da Camada de Dados
+  var campoEstado = {{dlv-state}}; // Substitua pela variável da sua Camada de Dados
 
   if (campoEstado) {
     var estadoSelecionado = campoEstado.value;
