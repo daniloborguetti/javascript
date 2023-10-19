@@ -31,7 +31,7 @@ function() {
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoEstado = document.querySelector('[id="state"]'); // Substitua '#seuCampoQuerySelector' pelo seletor correto
+  var campoEstado = document.querySelector('[id="state"]'); // Substitua pela variável do seu formulário
 
   if (campoEstado) {
     var estadoSelecionado = campoEstado.value;
