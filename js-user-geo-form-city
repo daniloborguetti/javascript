@@ -1,14 +1,14 @@
 function formatCity() {
   var cityElement = document.querySelector('[id="city"]'); // Substitua pela variável do seu formulário
-  
+
   if (cityElement) {
     var cityValue = cityElement.value;
-    
+
     // Converte para letras minúsculas e remove espaços
-    parsed = parsed.toLowerCase().replace(/\s/g, '');
-    
+    var parsed = cityValue.toLowerCase().replace(/\s/g, '');
+
     return parsed;
   }
-  
+
   return null; // Retorna null se o elemento não for encontrado
 }
