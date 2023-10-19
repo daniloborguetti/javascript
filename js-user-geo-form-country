@@ -5,7 +5,7 @@ function() {
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoPais = document.querySelector('[id="country"]'); // Substitua '#seuCampoQuerySelector' pelo seletor correto
+  var campoPais = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
 
   if (campoPais) {
     var paisSelecionado = campoPais.value;
