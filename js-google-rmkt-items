@@ -1,11 +1,9 @@
 function() {
-  var ecommerceProductData = [
-    {
-      'id': '{{js-content_ids}}',  // ID is required.
-      'google_business_vertical': 'retail',	
-      // Rest of the product data should follow the data layer syntax.
-    },
-    // Multiple products may be included.
-  ];
-  return ecommerceProductData;
+  var productsId = {{js-content_ids}}; // Substitua pela variável que abre a matriz items
+  return ecommerceProductData = productsId.map(function(id) {
+    return{
+      id: item_id,  // Verifique o formato do parâmetro id
+      google_business_vertical: 'retail',    
+    }
+  });
 }
