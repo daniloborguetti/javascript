@@ -1,6 +1,6 @@
 function() {
   var productsId = {{js-content_ids}}; // Substitua pela variável que abre a matriz items
-  return ecommerceProductData = productsId.map(function(id) {
+  return ecommerceProductData = productsId.map(function(item_id) {
     return{
       id: item_id,  // Verifique o formato do parâmetro id
       google_business_vertical: 'retail',    
