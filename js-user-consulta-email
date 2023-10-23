@@ -1,18 +1,18 @@
 function () {
-  if ({{user_data.dlv.ecommerce.customer.billing_email_hash}}) {
+  if ({{user-dlv-customerEmail}}) {
     
-    // Se tiver informação na datalayer executa, senão proximo
-    return {{user_data.dlv.ecommerce.customer.billing_email_hash}};
+    // Se tiver informação no DataLayer executa, senão proximo
+    return {{user-dlv-customerEmail}};
   
-  } else if ({{INPUT.[0].pag_checkout.user_data.em}}) {
+  } else if ({{user-js-email}}) {
     
-    // Se tiver informação no INPUT do site executa, senão proximo
-    return {{INPUT.[0].pag_checkout.user_data.em}};
+    // Se tiver informação no Input do site executa, senão proximo
+    return {{user-js-email}};
 
-  } else if ({{cookies._fbp_em_hash}}) {
+  } else if ({{cookie-LeadEmail}}) {
     
-    // Se tiver informação na cookies executa, senão vazio
-    return {{cookies._fbp_em_hash}};
+    // Se tiver informação nos Cookies executa, senão vazio
+    return {{cookie-LeadEmail}};
 
   } else {
     return undefined;
