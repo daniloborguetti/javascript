@@ -1,0 +1,20 @@
+function () {
+  if ({{user_data.dlv.ecommerce.customer.billing_email_hash}}) {
+    
+    // Se tiver informação na datalayer executa, senão proximo
+    return {{user_data.dlv.ecommerce.customer.billing_email_hash}};
+  
+  } else if ({{INPUT.[0].pag_checkout.user_data.em}}) {
+    
+    // Se tiver informação no INPUT do site executa, senão proximo
+    return {{INPUT.[0].pag_checkout.user_data.em}};
+
+  } else if ({{cookies._fbp_em_hash}}) {
+    
+    // Se tiver informação na cookies executa, senão vazio
+    return {{cookies._fbp_em_hash}};
+
+  } else {
+    return undefined;
+  }
+}
