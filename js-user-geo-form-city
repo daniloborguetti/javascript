@@ -1,14 +1,9 @@
-function formatCity() {
-  var cityElement = document.querySelector('[id="city"]'); // Substitua pela variável do seu formulário
-
-  if (cityElement) {
-    var cityValue = cityElement.value;
-
+function() {
+  var dlvCity = document.querySelector('[id="city"]'); // Substitua pela variável da sua Camada de Dados
+  if (typeof dlvCity === 'string') {
+    
     // Converte para letras minúsculas e remove espaços
-    var parsed = cityValue.toLowerCase().replace(/\s/g, '');
-
-    return parsed;
+    return dlvCity.toLowerCase().replace(/\s/g, '');
   }
-
-  return null; // Retorna null se o elemento não for encontrado
+  return undefined;
 }
