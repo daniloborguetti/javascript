@@ -1,18 +1,18 @@
 function () {
-  if ({{user-dlv-customerEmail}}) {
+  if ({{dlv-variavel}}) {
     
     // Se tiver informação no DataLayer executa, senão proximo
-    return {{user-dlv-customerEmail}};
+    return {{dlv-variavel}};
   
-  } else if ({{user-js-email}}) {
+  } else if ({{js-variavel}}) {
     
     // Se tiver informação no Input do site executa, senão proximo
-    return {{user-js-email}};
+    return {{js-variavel}};
 
-  } else if ({{cookie-LeadEmail}}) {
+  } else if ({{cookie-variavel}}) {
     
     // Se tiver informação nos Cookies executa, senão vazio
-    return {{cookie-LeadEmail}};
+    return {{cookie-variavel}};
 
   } else {
     return undefined;
