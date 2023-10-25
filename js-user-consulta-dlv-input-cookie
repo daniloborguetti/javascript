@@ -4,7 +4,7 @@ function () {
     // Se tiver informação no DataLayer executa, senão proximo
     return {{dlv-variavel}};
   
-  } else if ({{js-variavel}}) {
+  } else if ({{i-variavel}}) {
     
     // Se tiver informação no Input do site executa, senão proximo
     return {{js-variavel}};
