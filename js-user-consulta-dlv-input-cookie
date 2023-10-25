@@ -4,10 +4,10 @@ function () {
     // Se tiver informação no DataLayer executa, senão proximo
     return {{dlv-variavel}};
   
-  } else if ({{i-variavel}}) {
+  } else if ({{input-variavel}}) {
     
     // Se tiver informação no Input do site executa, senão proximo
-    return {{js-variavel}};
+    return {{input-variavel}};
 
   } else if ({{cookie-variavel}}) {
     
