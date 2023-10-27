@@ -41,9 +41,9 @@ function() {
     if (estados[estadoFormatado]) {
       return estados[estadoFormatado];
     } else {
-      return 'Estado não encontrado';
+      return undefined;
     }
   } else {
-    return 'Campo não encontrado';
+    return undefined;
   }
 }
