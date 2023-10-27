@@ -15,9 +15,9 @@ function() {
     if (paises[paisFormatado]) {
       return paises[paisFormatado];
     } else {
-      return 'País não encontrado';
+      return undefined;
     }
   } else {
-    return 'Campo não encontrado';
+    return undefined;
   }
 }
