@@ -16,10 +16,5 @@ function getFirstName() {
   // Juntando os nomes novamente em uma única string
   var result = names.join(' ');
 
-  // Define o valor em um cookie com validade de 30 dias a partir da data atual
-  var expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-  document.cookie = "LeadFirstName=" + result + "; expires=" + expirationDate.toUTCString() + "; path=/";
-
   return result;
 }
