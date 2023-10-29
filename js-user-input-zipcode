@@ -1,4 +1,4 @@
-function formatAndSetCookie() {
+function formatZipCode() {
  
   // Substitua pela variável do seu formulário
   var postcodeInput = document.querySelector('[id="zipcode"]');
@@ -11,10 +11,6 @@ function formatAndSetCookie() {
 
     if (zipcodeFormated) {
       
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
-      var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadZipCode=" + zipcodeFormated[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
       return zipcodeFormated[0];
     } else {
       
