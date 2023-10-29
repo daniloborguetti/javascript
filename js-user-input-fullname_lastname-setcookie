@@ -1,0 +1,25 @@
+function getLastNameSetCookie() {
+
+  // Substitua pela variável do seu formulário
+  var nameField = document.querySelector('[id="fullname"]'); 
+  var name = nameField.value;
+
+  // Dividindo o nome em partes usando o espaço em branco para separar
+  var names = name.split(' ');
+
+  // Verificando se há mais de um nome
+  if (names.length > 1) {
+    // Retorne o último nome
+    var lastname = names[names.length - 1];
+
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadLastName=" + lastname + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    return lastname;
+  } else {
+    // Se houver apenas um nome, retorne uma string vazia
+    return '';
+  }
+}
