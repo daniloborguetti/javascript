@@ -15,6 +15,7 @@ function formatZipCodeSetCookie() {
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
       document.cookie = "LeadZipCode=" + zipcodeFormated[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
       return zipcodeFormated[0];
     } else {
       
