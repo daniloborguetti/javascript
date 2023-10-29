@@ -1,4 +1,4 @@
-function formatAndSetCookie() {
+function formatLastName() {
   
   // Substitua pela variável do seu formulário
   var lastnameInput = document.querySelector('[id="lastname"]');
@@ -6,11 +6,6 @@ function formatAndSetCookie() {
   // Verifica se lastnameInput não é nulo ou indefinido
   if (lastnameInput) {
     var lastnameValue = lastnameInput.value.toLowerCase(); // Converte para letras minúsculas
-    
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadLastName=" + lastnameValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
   
     return lastnameValue;
   }
