@@ -1,0 +1,28 @@
+function formatCountrySetCookie() {
+
+  // Mapeamento de países e seus códigos
+  var paises = {
+    'Brasil': 'br'
+  };
+
+  // Seletor do campo de entrada - substitua pelo seu seletor
+  var campoPais = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
+
+  if (campoPais) {
+    var paisSelecionado = campoPais.value;
+    var paisFormatado = paisSelecionado.trim(); // Remove espaços em branco no início e no fim
+
+    // Verifica se o país existe no mapeamento
+    if (paises[paisFormatado]) {
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadCountry=" + paises[paisFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      return paises[paisFormatado];
+    } else {
+      return undefined;
+    }
+  } else {
+    return undefined;
+  }
+}
