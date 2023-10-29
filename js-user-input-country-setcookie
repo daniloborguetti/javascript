@@ -14,6 +14,7 @@ function formatCountrySetCookie() {
 
     // Verifica se o país existe no mapeamento
     if (paises[paisFormatado]) {
+
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
