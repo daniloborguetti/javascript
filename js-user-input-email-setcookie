@@ -1,0 +1,18 @@
+function formatEmailSetCookie() {
+  
+  // Substitua pela variável do seu formulário
+  var emailInput = document.querySelector('[id="email"]'); 
+
+  // Converte para letras minúsculas
+  if (emailInput) {
+    var emailValue = emailInput.value.toLowerCase(); 
+
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadEmail=" + emailValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
+
+    return emailValue;
+  }
+  return undefined;
+}
