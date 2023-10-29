@@ -1,4 +1,4 @@
-function formatAndSetCookie() {
+function formatCountry() {
 
   // Mapeamento de países e seus códigos
   var paises = {
@@ -14,10 +14,7 @@ function formatAndSetCookie() {
 
     // Verifica se o país existe no mapeamento
     if (paises[paisFormatado]) {
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
-      var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadCountry=" + paises[paisFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      
       return paises[paisFormatado];
     } else {
       return undefined;
