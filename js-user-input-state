@@ -1,4 +1,5 @@
-function() {
+function formatAndSetCookie() {
+ 
   // Mapeamento de estados e seus códigos
   var estados = {
     'Acre': 'ac',
@@ -30,15 +31,22 @@ function() {
     'Tocantins': 'to'
   };
 
-  // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoEstado = document.querySelector('[id="state"]'); // Substitua pela variável do seu formulário
-
+  // Substitua pela variável do seu formulário
+  var campoEstado = document.querySelector('[id="state"]'); 
+  
+  // Remove espaços em branco no início e no fim
   if (campoEstado) {
     var estadoSelecionado = campoEstado.value;
-    var estadoFormatado = estadoSelecionado.trim(); // Remove espaços em branco no início e no fim
+    var estadoFormatado = estadoSelecionado.trim(); 
 
     // Verifica se o estado existe no mapeamento
     if (estados[estadoFormatado]) {
+      
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadState=" + estados[estadoFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
       return estados[estadoFormatado];
     } else {
       return undefined;
