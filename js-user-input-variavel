@@ -6,11 +6,6 @@ function formatAndSetCookie() {
   if (nameField) {
     var name = nameField.value;
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadVariavel=" + name + "; expires=" + expirationDate.toUTCString() + "; path=/";
-
     return name;
   } else {
     return undefined;
