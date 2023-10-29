@@ -1,4 +1,4 @@
-function formatAndSetCookie() {
+function formatState() {
  
   // Mapeamento de estados e seus códigos
   var estados = {
@@ -41,11 +41,6 @@ function formatAndSetCookie() {
 
     // Verifica se o estado existe no mapeamento
     if (estados[estadoFormatado]) {
-      
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
-      var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadState=" + estados[estadoFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
       return estados[estadoFormatado];
     } else {
