@@ -1,0 +1,25 @@
+function formatPhoneSetCookie() {
+  // Substitua pela variável do seu formulário
+  var phoneInput = document.querySelector('[id="phone"]');
+
+  if (phoneInput) {
+    var phoneValue = phoneInput.value;
+
+    // Remove caracteres não numéricos e espaços
+    var numeroLimpo = phoneValue.replace(/\D/g, '');
+
+    // Adiciona o código do país 55 (Brasil) se necessário
+    if (!numeroLimpo.startsWith('55')) {
+      numeroLimpo = '55' + numeroLimpo;
+    }
+
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadPhone=" + numeroLimpo + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    return numeroLimpo;
+  }
+
+  return undefined;
+}
