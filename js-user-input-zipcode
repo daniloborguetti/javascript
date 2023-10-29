@@ -1,13 +1,27 @@
-function formatarCEP() {
-  var name = document.querySelector('[id="zipcode"]'); // Substitua pela variável do seu formulário
-  var zipcode = name.value;
+function formatAndSetCookie() {
+ 
+  // Substitua pela variável do seu formulário
+  var postcodeInput = document.querySelector('[id="zipcode"]');
 
-  // Extrai os primeiros 5 caracteres numéricos
-  var zipcodeFormated = zipcode.match(/\d{5}/);
+  if (postcodeInput) {
+    var postcodeValue = postcodeInput.value;
 
-  if (zipcode) {
-    return zipcodeFormated[0]; // Retorna os primeiros 5 caracteres numéricos
-  } else {
-    return ""; // Retorna uma string vazia se não encontrar números
+    // Extrai os primeiros 5 caracteres numéricos
+    var zipcodeFormated = postcodeValue.match(/\d{5}/);
+
+    if (zipcodeFormated) {
+      
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadZipCode=" + zipcodeFormated[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      return zipcodeFormated[0];
+    } else {
+      
+      // Retorna uma string vazia se não encontrar números
+      return "";
+    }
   }
+
+  return undefined;
 }
