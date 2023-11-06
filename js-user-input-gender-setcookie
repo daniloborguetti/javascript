@@ -1,0 +1,35 @@
+function formatGenderSetCookie() {
+  // Substitua pela variável do seu formulário
+  var nameField = document.querySelector('[id="gender"]'); 
+
+  if (nameField) {
+    var name = nameField.value;
+
+    // Transforma o valor em letras minúsculas
+    name = name.toLowerCase();
+
+    // Função anônima para calcular o hash SHA-256
+    var sha256 = function(str) {
+      var buffer = new TextEncoder().encode(str);
+      return crypto.subtle.digest("SHA-256", buffer).then(function(hashBuffer) {
+        var hashArray = Array.from(new Uint8Array(hashBuffer));
+        var hashHex = hashArray.map(function(byte) {
+          return byte.toString(16).padStart(2, '0');
+        }).join('');
+        return hashHex;
+      });
+    };
+
+    // Calcula o hash SHA-256 do valor
+    sha256(name).then(function(hash) {
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadGender=" + hash + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    });
+
+    return name;
+  } else {
+    return undefined;
+  }
+}
