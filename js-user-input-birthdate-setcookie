@@ -1,30 +1,20 @@
-function formatBirthdateSetCookie(name, value, days) {
-  var expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + days);
-  var expires = "expires=" + expirationDate.toUTCString();
-  document.cookie = name + "=" + value + "; " + expires;
-}
-
-function formatarDataNascimento() {
+function formatBirthdateSetCookie() {
   var birthdate = document.querySelector('input[id="birthdate"]').value;
   var partes = birthdate.split('/');
   if (partes.length !== 3) {
     return 'Data inválida';
   }
+
   var dia = partes[0].padStart(2, '0');
   var mes = partes[1].padStart(2, '0');
   var ano = partes[2];
+
   var dataFormatada = ano + mes + dia;
 
-  // Define o nome do cookie e valor
-  var cookieName = "dataNascimento";
-  var cookieValue = dataFormatada;
-
-  // Define o prazo de validade do cookie em 30 dias
-  var diasValidade = 30;
-
-  // Define o cookie com prazo de validade de 30 dias
-  setCookie(cookieName, cookieValue, diasValidade);
+  // Defina o cookie com nome "dataNascimento" com duração de 30 dias
+  var expires = new Date();
+  expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000);
+  document.cookie = 'LeadBirthdate=' + dataFormatada + '; expires=' + expires.toUTCString() + '; path=/';
 
   return dataFormatada;
 }
