@@ -1,13 +1,4 @@
-function inputVariavel() {
-
-  // Substitua pela variável do seu formulário
-  var nameField = document.querySelector('[id="variavel"]'); 
-
-  if (nameField) {
-    var name = nameField.value;
-
-    return name;
-  } else {
-    return undefined;
-  }
+function () {
+  var name =  document.querySelector ('[id="variavel"]'); // Substitua pela variável do seu formulário
+  return name.value;
 }
