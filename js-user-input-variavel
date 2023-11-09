@@ -1,4 +1,4 @@
-function formatAndSetCookie() {
+function inputVariavel() {
 
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="variavel"]'); 
