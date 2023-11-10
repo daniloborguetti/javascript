@@ -1,16 +1,19 @@
-function getLastNameSetCookie() {
+function formatLastNameSetCookie() {
 
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="fullname"]'); 
   var name = nameField.value;
+
+  // Convertendo o nome para letras minúsculas
+  name = name.toLowerCase();
 
   // Dividindo o nome em partes usando o espaço em branco para separar
   var names = name.split(' ');
 
   // Verificando se há mais de um nome
   if (names.length > 1) {
-    // Retorne o último nome
-    var lastname = names[names.length - 1];
+    // Retornando o último nome em letras minúsculas
+    var lastname = names[names.length - 1].toLowerCase();
 
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
@@ -23,3 +26,4 @@ function getLastNameSetCookie() {
     return '';
   }
 }
+
