@@ -1,8 +1,11 @@
-function getFirstNameSetCookie() {
+function formatFirstNameSetCookie() {
 
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="fullname"]'); 
   var name = nameField.value;
+
+  // Convertendo o nome para letras minúsculas
+  name = name.toLowerCase();
 
   // Dividindo o nome em partes usando o espaço em branco para separar
   var names = name.split(' ');
