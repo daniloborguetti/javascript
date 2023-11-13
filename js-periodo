@@ -1,0 +1,16 @@
+function() {
+    var dataHora = new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"});
+    dataHora = new Date(dataHora);
+    var hora = dataHora.getHours();
+    var minutos = dataHora.getMinutes();
+
+    if ((hora === 0 && minutos >= 30) || (hora > 0 && hora < 6)) {
+        return 'madrugada';
+    } else if (hora >= 9 && hora < 18) {
+        return 'dia';
+    } else if (hora >= 18 && hora < 0) {
+        return 'noite';
+    } else {
+        return '';
+    }
+}
