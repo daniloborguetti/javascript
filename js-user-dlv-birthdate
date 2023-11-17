@@ -1,5 +1,5 @@
 function formatarDataNascimento() {
-  var birthdate = '{{birthdate}}'; // Substitua pela variável da sua Camada de Dados
+  var birthdate = {{birthdate}}; // Substitua pela variável da sua Camada de Dados
 
   var partes = birthdate.split('/'); // Substitua pelo caracterer que separa a data
   if (partes.length !== 3) {
@@ -11,18 +11,5 @@ function formatarDataNascimento() {
   var ano = partes[2];
 
   var dataFormatada = ano + mes + dia;
-
-  // Adicionar conversão em hash SHA-256
-  var hashFormatada = sha256(dataFormatada);
-
-  return hashFormatada;
-}
-
-// Função para calcular o hash SHA-256
-function sha256(str) {
-  // Código para calcular o hash SHA-256
-  // Exemplo: usando a biblioteca crypto-js
-  var CryptoJS = require("crypto-js");
-  var hash = CryptoJS.SHA256(str).toString(CryptoJS.enc.Hex);
-  return hash;
+  return dataFormatada;
 }
