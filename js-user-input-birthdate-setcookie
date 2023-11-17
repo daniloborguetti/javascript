@@ -11,22 +11,10 @@ function formatBirthdateSetCookie() {
 
   var dataFormatada = ano + mes + dia;
 
-  // Adicionar conversão em hash SHA-256
-  var hashFormatada = sha256(dataFormatada);
-
-  // Defina o cookie com nome "LeadBirthdate" contendo o hash, com duração de 30 dias
+  // Defina o cookie com nome "dataNascimento" com duração de 30 dias
   var expires = new Date();
   expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000);
-  document.cookie = 'LeadBirthdate=' + hashFormatada + '; expires=' + expires.toUTCString() + '; path=/';
+  document.cookie = 'LeadBirthdate=' + dataFormatada + '; expires=' + expires.toUTCString() + '; path=/';
 
-  return hashFormatada;
-}
-
-// Função para calcular o hash SHA-256
-function sha256(str) {
-  // Código para calcular o hash SHA-256
-  // Exemplo: usando a biblioteca crypto-js
-  var CryptoJS = require("crypto-js");
-  var hash = CryptoJS.SHA256(str).toString(CryptoJS.enc.Hex);
-  return hash;
+  return dataFormatada;
 }
