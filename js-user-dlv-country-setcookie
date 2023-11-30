@@ -1,4 +1,9 @@
 function formatCountry() {
+// Mapeamento de países e seus códigos
+  var paises = {
+    'Brasil': 'br'
+  };
+
   // Substitua pela variável da sua Camada de Dados
   var Country = {{user-dlv-country}};
   
