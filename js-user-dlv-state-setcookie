@@ -35,8 +35,6 @@ function formatState() {
   
   // Verifique se a variável está definida e não é nula
   if (State) {
-    // Converta para letras minúsculas
-    var formattedState = State.toLowerCase();
 
     // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
