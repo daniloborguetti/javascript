@@ -1,0 +1,19 @@
+function formatFirstNameSetCookie() {
+  
+  // Substitua pela variável da Camada de Dados
+  var firstnameInput = {{user-dlv-firstname}};
+  
+  // Verifica se firstnameInput não é nulo ou indefinido
+  if (firstnameInput) {
+    var firstnameValue = firstnameInput.value.toLowerCase(); // Converte para letras minúsculas
+    
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadFirstName=" + firstnameValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
+  
+    return firstnameValue;
+  }
+
+  return undefined;
+}
