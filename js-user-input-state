@@ -37,11 +37,11 @@ function formatState() {
   // Remove espaços em branco no início e no fim
   if (campoEstado) {
     var estadoSelecionado = campoEstado.value;
-    var estadoFormatado = estadoSelecionado.trim(); 
+    var estadoFormatado = estadoSelecionado.trim().toLowerCase(); // Convertendo para letras minúsculas
 
     // Verifica se o estado existe no mapeamento
     if (estados[estadoFormatado]) {
-
+     
       return estados[estadoFormatado];
     } else {
       return undefined;
@@ -50,3 +50,4 @@ function formatState() {
     return undefined;
   }
 }
+
