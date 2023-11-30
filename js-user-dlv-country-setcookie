@@ -1,29 +1,19 @@
-function formatCountrySetCookie() {
+function formatCountry() {
+  // Substitua pela variável da sua Camada de Dados
+  var Country = {{user-dlv-country}};
+  
+  // Verifique se a variável está definida e não é nula
+  if (Country) {
+    // Converta para letras minúsculas
+    var formattedCountry = Country.toLowerCase();
 
-  // Mapeamento de países e seus códigos
-  var paises = {
-    'BR': 'br'
-  };
+    // Armazene o valor em um cookie com duração de 30 dias
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadCountry=" + formattedCountry + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-  // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoPais = {{user-dlv-country}}; // Substitua pela variável da Camada de Dados
-
-  if (campoPais) {
-    var paisSelecionado = campoPais.value;
-    var paisFormatado = paisSelecionado.trim(); // Remove espaços em branco no início e no fim
-
-    // Verifica se o país existe no mapeamento
-    if (paises[paisFormatado]) {
-
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
-      var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadCountry=" + paises[paisFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
-      return paises[paisFormatado];
-    } else {
-      return undefined;
-    }
+    return formattedCountry;
   } else {
-    return undefined;
+    return null; // Retorna nulo se a variável estiver vazia
   }
 }
