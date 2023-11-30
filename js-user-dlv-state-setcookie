@@ -1,0 +1,25 @@
+function formatStateSetCookie() {
+  // Substitua pela variável da Camada de Dados
+  var campoEstado = {{user-dlv-state}}; 
+  
+  // Remove espaços em branco no início e no fim
+  if (campoEstado) {
+    var estadoSelecionado = campoEstado.value;
+    var estadoFormatado = estadoSelecionado.trim().toLowerCase(); // Convertendo para letras minúsculas
+
+    // Verifica se o estado existe no mapeamento
+    if (estados[estadoFormatado]) {
+      
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadState=" + estados[estadoFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+      return estados[estadoFormatado];
+    } else {
+      return undefined;
+    }
+  } else {
+    return undefined;
+  }
+}
