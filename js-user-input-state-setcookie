@@ -1,4 +1,4 @@
-function formatStateSetCookie() {
+function formatState() {
  
   // Mapeamento de estados e seus códigos
   var estados = {
@@ -37,7 +37,7 @@ function formatStateSetCookie() {
   // Remove espaços em branco no início e no fim
   if (campoEstado) {
     var estadoSelecionado = campoEstado.value;
-    var estadoFormatado = estadoSelecionado.trim(); 
+    var estadoFormatado = estadoSelecionado.trim().toLowerCase(); // Convertendo para letras minúsculas
 
     // Verifica se o estado existe no mapeamento
     if (estados[estadoFormatado]) {
@@ -55,3 +55,4 @@ function formatStateSetCookie() {
     return undefined;
   }
 }
+
