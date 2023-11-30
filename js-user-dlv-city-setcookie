@@ -1,20 +1,19 @@
-function formatCitySetCookie() {
- 
-  // Substitua pela variável do seu formulário
-  var cityInput = {{user-dlv-city}};
+function formatCity() {
+  // Substitua pela variável da sua Camada de Dados
+  var City = {{user-dlv-city}};
   
-  // Verifica se cityInput é um objeto e não é nulo
-  if (typeof cityInput === 'object' && cityInput !== null) {
-    
-    // Converte para letras minúsculas e remove espaços
-    var cityValue = cityInput.value.toLowerCase().replace(/\s/g, '');
+  // Verifique se a variável está definida e não é nula
+  if (City) {
+    // Converta para letras minúsculas
+    var formattedCity = City.toLowerCase();
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadCity=" + cityValue + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadCity=" + formattedCity + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-    return cityValue;
+    return formattedCity;
+  } else {
+    return null; // Retorna nulo se a variável estiver vazia
   }
-  return undefined;
 }
