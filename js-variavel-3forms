@@ -1,0 +1,17 @@
+function () {
+  var primeiro = document.querySelectorAll('[id="variavel"]')[0].value; // Substitua pela variável do seu formulário
+  var segundo = document.querySelectorAll('[id="variavel"]')[1].value; // Substitua pela variável do seu formulário
+  var terceiro = document.querySelectorAll('[id="variavel"]')[2].value; // Substitua pela variável do seu formulário
+
+  var email;
+
+  if (primeiro) {
+    email = primeiro;
+  } else if (segundo) {
+    email = segundo;
+  } else {
+    email = terceiro;
+  }
+
+  return email;
+}
