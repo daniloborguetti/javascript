@@ -1,0 +1,10 @@
+function() {
+  var order = {{dlv-order}};
+  return order.items.map(function(item, indice) {
+    return {
+      id: order.optionsIds[indice],
+      quantity: item.quantity 
+    };
+  });
+}
+
