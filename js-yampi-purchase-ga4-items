@@ -1,0 +1,13 @@
+function() {
+  var order = {{dlv-order}};
+  return order.items.map(function(item, indice) {
+    return {
+      item_id: order.optionsIds[indice],
+      item_name: item.product.name,
+      price: item.product.price,
+      item_brand: item.product.brand,
+      item_category: item.product.categories[0], 
+      quantity: item.quantity 
+    };
+  });
+}
