@@ -1,0 +1,13 @@
+function formatStateSetCookie() {
+   var e = document.getElementById("state"); // Substitua pela variável do seu formulário
+   var str = e.options[e.selectedIndex].text.toLowerCase(); // Formata o valor em letras minúsculas
+
+   // Cria uma data para 30 dias a partir da data atual
+   var dataExpiracao = new Date();
+   dataExpiracao.setDate(dataExpiracao.getDate() + 30);
+
+   // Define o cookie com nome "LeadState", valor "str" e data de expiração de 30 dias
+   document.cookie = "LeadState=" + str + "; expires=" + dataExpiracao.toUTCString();
+
+   return str;
+}
