@@ -1,0 +1,18 @@
+function () {
+    var products = {{items}}; //variável do passo 1
+    var ids_shopify = {{optionsIds}}; // Variável do passo 2
+
+    // Usando map para transformar cada produto em um formato específico
+    var formattedItems = products.map(function(product, index) {
+        return {
+            "item_id": ids_shopify[index], // Usando ids_shopify diretamente aqui
+            "item_name": product.name,
+            "item_brand": product.brand,
+            "item_category": product.category,
+            "price": parseFloat(product.price),
+            "quantity": product.quantity
+        };
+    });
+
+    return formattedItems;
+}
