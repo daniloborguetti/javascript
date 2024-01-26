@@ -1,6 +1,6 @@
 function formatGenderSetCookie() {
   // Substitua pela variável do seu formulário
-  var nameField = document.querySelector('[id="gender"]'); 
+  var nameField = document.querySelector('[id="name"]'); 
 
   if (nameField) {
     var name = nameField.value;
