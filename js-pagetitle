@@ -1,0 +1,6 @@
+function(){
+  var pageName = document.title;
+  pageName = pageName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, '');
+  console.log(pageName)
+  return pageName;
+}
