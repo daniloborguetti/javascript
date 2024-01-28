@@ -1,0 +1,5 @@
+function () {
+  var str = {{dlv city}}; // Substitua pela variável da sua Camada de Dados
+  var parsed = str.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+  return parsed;
+}
