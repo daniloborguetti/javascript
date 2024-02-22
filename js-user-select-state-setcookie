@@ -1,13 +1,47 @@
 function formatStateSetCookie() {
-   var e = document.getElementById("state"); // Substitua pela variável do seu formulário
-   var str = e.options[e.selectedIndex].text.toLowerCase(); // Formata o valor em letras minúsculas
+    var e = document.getElementById("state"); // Substitua pela variável do seu formulário
+    var stateFullName = e.options[e.selectedIndex].text; // Assume que é um <select> e obtém o texto selecionado
 
-   // Cria uma data para 30 dias a partir da data atual
-   var dataExpiracao = new Date();
-   dataExpiracao.setDate(dataExpiracao.getDate() + 30);
+    // Mapeamento de nomes completos de estados para siglas
+    var stateMap = {
+        'Acre': 'ac',
+        'Alagoas': 'al',
+        'Amapá': 'ap',
+        'Amazonas': 'am',
+        'Bahia': 'ba',
+        'Ceará': 'ce',
+        'Distrito Federal': 'df',
+        'Espírito Santo': 'es',
+        'Goiás': 'go',
+        'Maranhão': 'ma',
+        'Mato Grosso': 'mt',
+        'Mato Grosso do Sul': 'ms',
+        'Minas Gerais': 'mg',
+        'Pará': 'pa',
+        'Paraíba': 'pb',
+        'Paraná': 'pr',
+        'Pernambuco': 'pe',
+        'Piauí': 'pi',
+        'Rio de Janeiro': 'rj',
+        'Rio Grande do Norte': 'rn',
+        'Rio Grande do Sul': 'rs',
+        'Rondônia': 'ro',
+        'Roraima': 'rr',
+        'Santa Catarina': 'sc',
+        'São Paulo': 'sp',
+        'Sergipe': 'se',
+        'Tocantins': 'to'
+    };
 
-   // Define o cookie com nome "LeadState", valor "str" e data de expiração de 30 dias
-   document.cookie = "LeadState=" + str + "; expires=" + dataExpiracao.toUTCString();
+    // Converte o nome completo para a sigla usando o mapeamento
+    var stateAbbreviation = (stateMap[stateFullName] || 'desconhecido').toLowerCase(); // Converte para minúsculas
 
-   return str;
+    // Cria uma data para 30 dias a partir da data atual
+    var dataExpiracao = new Date();
+    dataExpiracao.setDate(dataExpiracao.getDate() + 30);
+
+    // Define o cookie com nome "LeadState", valor da sigla do estado em minúsculas e data de expiração de 30 dias
+    document.cookie = "LeadState=" + stateAbbreviation + "; expires=" + dataExpiracao.toUTCString() + "; path=/";
+
+    return stateAbbreviation;
 }
