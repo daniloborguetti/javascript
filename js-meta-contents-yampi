@@ -1,0 +1,24 @@
+function formatContentsForYampi() {
+    // Encontra o objeto na Camada de Dados que contém optionsIds
+    var dataLayerObject = window.dataLayer.filter(function(obj) {
+        return obj.optionsIds !== undefined;
+    })[0]; // Assume que é o primeiro objeto que contém optionsIds
+
+    // Verifica se optionsIds está disponível
+    if (!dataLayerObject) {
+        console.log("optionsIds não encontrado na Camada de Dados.");
+        return;
+    }
+
+    var optionsIds = dataLayerObject.optionsIds;
+
+    // Cria a matriz de contents baseada nos optionsIds
+    var contents = optionsIds.map(function(id) {
+        return {
+            'id': id,
+            'quantity': 1 // Define a quantidade como 1, ajuste conforme necessário
+        };
+    });
+
+    return contents;
+}
