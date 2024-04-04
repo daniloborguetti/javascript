@@ -1,0 +1,25 @@
+function() {
+  // Substitua isso pelo seu objeto de dados original, se necessário
+  // Neste exemplo, assumiremos que os dados são inseridos diretamente.
+  var purchase = {{dlv-order.items}}; // Variavel datalayer de items
+
+  // Função para simplificar a estrutura de cada item
+  var purchaseItems = function(item) {
+    return {
+      item_id: item.product.id, // Editar em caso de catálogo 
+      item_name: item.name,
+      item_brand: item.product.brand,
+      item_variant: item.product.sku,
+      quantity: item.quantity,
+      item_category: item.categories_names.length > 0 ? item.categories_names[0] : null,
+      item_category2: item.categories_names.length > 1 ? item.categories_names[1] : null,
+      price:item.product.price,
+      is_bundle: item.is_bundle,
+      is_customized: item.customized,
+      is_order_bump: item.order_bump_id !== null
+    };
+  };
+
+  // Aplica a função de simplificação a cada item no array de dados e retorna
+  return purchase.map(purchaseItems);
+}
