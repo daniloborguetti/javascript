@@ -1,25 +1,39 @@
-function getDDIAndPhoneNumber() {
-    // Captura o DDI
-    var dialCodeSpan = document.querySelector('span[data-dial-code]');
-    var ddiValue = 'DDI não encontrado'; // Valor padrão caso o DDI não seja encontrado
-    if (dialCodeSpan) {
-        var dialCodeText = dialCodeSpan.textContent.trim();
-        ddiValue = dialCodeText.replace(/\D/g, ''); // Mantém apenas números
-    }
+function capturarDDIETelefoneEArmazenarEmCookie() {
+    // Mapeia as siglas dos países para seus respectivos DDIs
+    var ddiPorPais = {
+        "BR": "55",
+        "AF": "93",
+        "ZA": "27",
+        // Adicione mais países e seus DDIs de acordo com o Menu do Formulário
+    };
 
-    // Captura o número de telefone
-    var phoneInput = document.querySelector('[id="whatsapp-component-phone"]');
-    var phoneValue = undefined; // Valor padrão caso o número de telefone não seja encontrado
+    // Tenta encontrar o campo de telefone pelo ID
+    var phoneInput = document.getElementById('whatsapp-component-phone');
     if (phoneInput) {
-        phoneValue = phoneInput.value.replace(/\D/g, ''); // Mantém apenas números
+        // Lê o atributo data-country do campo de telefone
+        var codigoPais = phoneInput.getAttribute('data-country');
+        // Usa o código do país para encontrar o DDI correspondente na tabela de consulta
+        var ddi = ddiPorPais[codigoPais];
+        
+        // Captura o valor do input do telefone, removendo caracteres não numéricos
+        var numeroTelefone = phoneInput.value.replace(/\D/g, '');
 
-        // Opcional: Define o valor em um cookie com validade de 30 dias a partir da data atual
-        var expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-        document.cookie = "LeadPhone=" + phoneValue + "; expires=" + expirationDate.toUTCString() + "; path=/";
+        if (ddi && numeroTelefone) {
+            // Concatena o DDI e o número do telefone
+            var valorFinal = ddi + numeroTelefone;
+
+            // Define o valor em um cookie com validade de 30 dias a partir da data atual
+            var expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 30);
+            document.cookie = "LeadPhone=" + valorFinal + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+            return valorFinal;
+        } else {
+            console.log('DDI ou número de telefone não encontrado.');
+            return 'DDI ou número de telefone não encontrado'; // Ou retorne um valor padrão ou erro
+        }
+    } else {
+        console.log('Campo de telefone não encontrado.');
+        return 'Campo de telefone não encontrado'; // Ou retorne um valor padrão ou erro
     }
-
-    // Retorna a junção dos valores do DDI e do número de telefone
-    // Se algum dos valores não for encontrado, retorna o valor padrão para esse campo
-    return ddiValue + phoneValue;
 }
