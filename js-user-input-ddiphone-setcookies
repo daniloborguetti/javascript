@@ -1,0 +1,25 @@
+function getDDIAndPhoneNumber() {
+    // Captura o DDI
+    var dialCodeSpan = document.querySelector('span[data-dial-code]');
+    var ddiValue = 'DDI não encontrado'; // Valor padrão caso o DDI não seja encontrado
+    if (dialCodeSpan) {
+        var dialCodeText = dialCodeSpan.textContent.trim();
+        ddiValue = dialCodeText.replace(/\D/g, ''); // Mantém apenas números
+    }
+
+    // Captura o número de telefone
+    var phoneInput = document.querySelector('[id="whatsapp-component-phone"]');
+    var phoneValue = undefined; // Valor padrão caso o número de telefone não seja encontrado
+    if (phoneInput) {
+        phoneValue = phoneInput.value.replace(/\D/g, ''); // Mantém apenas números
+
+        // Opcional: Define o valor em um cookie com validade de 30 dias a partir da data atual
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+        document.cookie = "LeadPhone=" + phoneValue + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    }
+
+    // Retorna a junção dos valores do DDI e do número de telefone
+    // Se algum dos valores não for encontrado, retorna o valor padrão para esse campo
+    return ddiValue + phoneValue;
+}
