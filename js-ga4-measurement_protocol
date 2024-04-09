@@ -1,0 +1,21 @@
+{
+  "client_id": "{{firestore-client_id}}",
+  "timestamp_micros": "{{firestore-timestamp}}",
+  "events": [{"name": "purchase",
+              "params":{
+                    "session_id": "{{firestore-session_id}}",
+                    "page_location": "{{firestore-page_location}}",
+                    "session_number": "{{firestore-session_number}}",
+                    "items": [{"item_id": "",
+                               "item_name": "",
+                               "price": "",
+                               "quantity": "1"
+                              }],
+                     "value": "",
+                     "currency": "BRL",
+                     "transaction_id": ""
+                    
+                        }
+              
+           }]
+}
