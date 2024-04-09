@@ -1,6 +1,6 @@
 function() {
-  var ga = {{cookie - _ga_XXX}}; // coloque aqui seu cookie de sessão
+  var ga = {{cookie-_ga_XXX}}; // coloque aqui seu cookie de sessão
   var parte = ga.split('.'); 
-  var tm = (+parte[5]+60)*1000000;  //somei 5 minutos ao timestamp atual e transformei em microsegundos
+  var tm = (+parte[5]+60)*1000000;  // soma 1 minuto ao timestamp atual e transforme em microsegundos
 return tm;
 }
