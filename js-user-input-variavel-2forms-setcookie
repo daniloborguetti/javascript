@@ -1,18 +1,22 @@
-function () {
-  var primeiro = document.querySelectorAll('[id="variavel"]')[0].value; // Substitua pela variável do seu formulário
-  var segundo = document.querySelectorAll('[id="variavel"]')[1].value; // Substitua pela variável do seu formulário
-  var email;
+function() {
+  // Seleciona os campos de input pelo ID
+  var emailInput1 = document.getElementById('emailInput1'); // Substitua 'emailInput1' pelo ID correto do primeiro campo de e-mail
+  var emailInput2 = document.getElementById('emailInput2'); // Substitua 'emailInput2' pelo ID correto do segundo campo de e-mail
 
-  if (primeiro) {
-    email = primeiro;
-  } else {
-    email = segundo;
+  // Verifica se os campos existem e captura o valor do e-mail
+  var email = '';
+  if (emailInput1 && emailInput1.value) {
+    email = emailInput1.value;
+  } else if (emailInput2 && emailInput2.value) {
+    email = emailInput2.value;
   }
 
-  // Configurando o cookie
-  var expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + 30); // Define a validade do cookie para 30 dias
-  document.cookie = "LeadEmail=" + encodeURIComponent(email) + "; expires=" + expiryDate.toUTCString() + "; path=/";
+  // Se um e-mail foi capturado, armazena em um cookie
+  if (email) {
+    var expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + 30); // Define a validade do cookie para 30 dias
+    document.cookie = "LeadEmail=" + encodeURIComponent(email) + "; expires=" + expiryDate.toUTCString() + "; path=/";
+  }
 
   return email;
 }
