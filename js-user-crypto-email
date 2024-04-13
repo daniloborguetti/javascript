@@ -1,0 +1,5 @@
+function() {
+  var email = {{user-email}};
+  var hashedEmail = CryptoJS.SHA256(email).toString();
+  return hashedEmail;
+}
