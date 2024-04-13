@@ -1,19 +1,18 @@
 function formatFirstNameSetCookie() {
-  
   // Substitua pela variável do seu formulário
-  var firstnameInput = document.querySelector('[id="firstname"]');
-  
-  // Verifica se firstnameInput não é nulo ou indefinido
-  if (firstnameInput) {
+  var firstnameInput = document.querySelector('[id="form-field-firstname"]');
+
+  // Verifica se firstnameInput não é nulo ou indefinido e se contém um valor não vazio
+  if (firstnameInput && firstnameInput.value.trim() !== '') {
     var firstnameValue = firstnameInput.value.toLowerCase(); // Converte para letras minúsculas
-    
+
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
     document.cookie = "LeadFirstName=" + firstnameValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
-  
+
     return firstnameValue;
   }
 
   return undefined;
-}
+} 
