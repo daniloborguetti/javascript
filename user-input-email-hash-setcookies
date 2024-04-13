@@ -1,0 +1,16 @@
+function() {
+  // Substitua pela variável de captura
+  var email = "{{user-input-email}}"; 
+  
+  // Calculando o hash SHA256 do e-mail
+  var hashedEmail = CryptoJS.SHA256(email).toString();
+
+  // Criando a data de expiração para o cookie
+  var expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 30); // Define a validade do cookie para 30 dias
+
+  // Definindo o cookie com o e-mail hash
+  document.cookie = "LeadEmailHash=" + encodeURIComponent(hashedEmail) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+  return hashedEmail;
+}
