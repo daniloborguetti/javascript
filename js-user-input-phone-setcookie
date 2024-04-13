@@ -2,7 +2,8 @@ function formatPhoneSetCookie() {
   // Substitua pela variável do seu formulário
   var phoneInput = document.querySelector('[id="phone"]');
 
-  if (phoneInput) {
+  // Verifica se phoneInput não é nulo ou indefinido e se contém um valor não vazio
+  if (phoneInput && phoneInput.value.trim() !== '') {
     var phoneValue = phoneInput.value;
 
     // Remove caracteres não numéricos e espaços
@@ -16,10 +17,10 @@ function formatPhoneSetCookie() {
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadPhone=" + numeroLimpo + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "LeadPhone=" + encodeURIComponent(numeroLimpo) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
     return numeroLimpo;
   }
 
-  return undefined;
+  return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
 }
