@@ -3,16 +3,16 @@ function formatEmailSetCookie() {
   // Substitua pela variável do seu formulário
   var emailInput = document.querySelector('[id="email"]'); 
 
-  // Converte para letras minúsculas
-  if (emailInput) {
-    var emailValue = emailInput.value.toLowerCase(); 
+  // Verifica se emailInput não é nulo ou indefinido e se contém um valor não vazio
+  if (emailInput && emailInput.value.trim() !== '') {
+    var emailValue = emailInput.value.trim().toLowerCase(); // Converte para letras minúsculas e remove espaços extras
 
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadEmail=" + emailValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
+    document.cookie = "LeadEmail=" + encodeURIComponent(emailValue) + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
 
     return emailValue;
   }
-  return undefined;
+  return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
 }
