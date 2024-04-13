@@ -1,6 +1,6 @@
 function formatFirstNameSetCookie() {
   // Substitua pela variável do seu formulário
-  var firstnameInput = document.querySelector('[id="form-field-firstname"]');
+  var firstnameInput = document.querySelector('[id="firstname"]');
 
   // Verifica se firstnameInput não é nulo ou indefinido e se contém um valor não vazio
   if (firstnameInput && firstnameInput.value.trim() !== '') {
