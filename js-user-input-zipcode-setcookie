@@ -1,28 +1,29 @@
 function formatZipCodeSetCookie() {
- 
-  // Substitua pela variável do seu formulário
-  var postcodeInput = document.querySelector('[id="zipcode"]');
 
-  if (postcodeInput) {
-    var postcodeValue = postcodeInput.value;
+  // Substitua pela variável do seu formulário
+  var zipcodeInput = document.querySelector('[id="zipcode"]');
+
+  // Verifica se zipcodeInput não é nulo ou indefinido e se contém um valor não vazio
+  if (zipcodeInput && zipcodeInput.value.trim() !== '') {
+    var zipcodeValue = zipcodeInput.value.trim();
 
     // Extrai os primeiros 5 caracteres numéricos
-    var zipcodeFormated = postcodeValue.match(/\d{5}/);
+    var zipcodeFormatted = zipcodeValue.match(/\d{5}/);
 
-    if (zipcodeFormated) {
-      
+    if (zipcodeFormatted) {
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadZipCode=" + zipcodeFormated[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      document.cookie = "LeadZipCode=" + zipcodeFormatted[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-      return zipcodeFormated[0];
+      return zipcodeFormatted[0];
     } else {
-      
       // Retorna uma string vazia se não encontrar números
       return "";
     }
   }
 
+  // Retorna undefined se o input é nulo ou o valor é vazio
+  console.log('Campo de zipcode não encontrado ou valor vazio.');
   return undefined;
 }
