@@ -1,18 +1,20 @@
-function formatAndSetCookie() {
+function formatVariableCookie() {
 
   // Substitua pela variável do seu formulário
-  var nameField = document.querySelector('[id="variavel"]'); 
+  var variableInput = document.querySelector('[id="variavel"]'); 
 
-  if (nameField) {
-    var name = nameField.value;
+  // Verifica se variableInput não é nulo ou indefinido e se contém um valor não vazio
+  if (variableInput && variableInput.value.trim() !== '') {
+    var value = variableInput.value.trim(); // Remove espaços em branco no início e no fim
 
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadVariavel=" + name + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "LeadVariavel=" + encodeURIComponent(value) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-    return name;
+    return value;
   } else {
-    return undefined;
+    console.log('Campo de variável não encontrado ou valor vazio.');
+    return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
   }
 }
