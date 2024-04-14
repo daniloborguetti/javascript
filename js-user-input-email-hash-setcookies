@@ -1,9 +1,16 @@
 function() {
+
   // Substitua pela variável de captura
-  var email = "{{user-input-email}}"; 
+  var email = "{{user-input-email}}"; // Certifique-se de que essa substituição seja feita corretamente no contexto de uso real
   
   // Calculando o hash SHA256 
   var hashedEmail = CryptoJS.SHA256(email).toString();
+
+  // Verifica se hashedEmail não é nulo ou indefinido e se contém um valor não vazio
+  if (!hashedEmail) {
+    console.error("Erro: O hash do e-mail não foi gerado corretamente.");
+    return ""; // Retorna uma string vazia ou algum valor de erro apropriado
+  }
 
   // Criando a data de expiração para o cookie
   var expirationDate = new Date();
