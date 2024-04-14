@@ -1,7 +1,6 @@
-function formatState() {
- 
+function formatStateCookie() {
   // Mapeamento de estados e seus códigos
-  var estados = {
+  var states = {
     'Acre': 'ac',
     'Alagoas': 'al',
     'Amapá': 'ap',
@@ -32,27 +31,26 @@ function formatState() {
   };
 
   // Substitua pela variável do seu formulário
-  var campoEstado = document.querySelector('[id="state"]'); 
-  
-  // Remove espaços em branco no início e no fim
-  if (campoEstado) {
-    var estadoSelecionado = campoEstado.value;
-    var estadoFormatado = estadoSelecionado.trim().toLowerCase(); // Convertendo para letras minúsculas
+  var stateInput = document.querySelector('[id="state"]');
+
+  // Verifica se stateInput não é nulo ou indefinido e se contém um valor não vazio
+  if (stateInput && stateInput.value.trim() !== '') {
+    var stateSelect = stateInput.value.trim().toLowerCase(); // Convertendo para letras minúsculas
 
     // Verifica se o estado existe no mapeamento
-    if (estados[estadoFormatado]) {
-      
+    if (states[stateSelect]) {
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadState=" + estados[estadoFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      document.cookie = "LeadState=" + states[stateSelect] + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-      return estados[estadoFormatado];
+      return states[stateSelect];
     } else {
-      return undefined;
+      console.log('Estado não mapeado ou inválido.');
+      return undefined; // Estado não encontrado no mapeamento
     }
   } else {
-    return undefined;
+    console.log('Campo de estado não encontrado ou valor vazio.');
+    return undefined; // Campo não encontrado ou valor vazio
   }
 }
-
