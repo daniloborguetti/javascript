@@ -1,6 +1,7 @@
 function formatStateCookie() {
+
   // Mapeamento de estados e seus códigos
-  var states = {
+  var stateMap = {
     'Acre': 'ac',
     'Alagoas': 'al',
     'Amapá': 'ap',
