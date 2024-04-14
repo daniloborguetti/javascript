@@ -1,4 +1,4 @@
-function() {
+function formatEmailHashSetCookie() {
 
   // Substitua pela variável de captura
   var email = "{{user-input-email}}"; // Certifique-se de que essa substituição seja feita corretamente no contexto de uso real
