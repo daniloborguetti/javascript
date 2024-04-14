@@ -1,20 +1,22 @@
 function formatPhoneDDISetCookie() {
     // Mapeia as siglas dos países para seus respectivos DDIs
-    var countryDDI = {
+    var countryDDIMap = {
         "BR": "55",
         "AF": "93",
         "ZA": "27",
-        // Adicione mais países e seus DDIs de acordo com o Menu do Formulário
     };
 
     // Tenta encontrar o campo de telefone pelo ID
     var phoneInput = document.getElementById('phone');
+
     // Verifica se phoneInput não é nulo ou indefinido e se contém um valor não vazio
     if (phoneInput && phoneInput.value.trim() !== '') {
+
         // Lê o atributo data-country do campo de telefone
-        var countryCode = phoneInput.getAttribute('data-country');  // Corrigido para data-country
+        var countryCode = phoneInput.getAttribute('data-country');
+
         // Usa o código do país para encontrar o DDI correspondente na tabela de consulta
-        var ddi = countryDDI[countryCode];
+        var ddi = countryDDIMap[countryCode];
         
         // Captura o valor do input do telefone, removendo caracteres não numéricos
         var phone = phoneInput.value.replace(/\D/g, '');
