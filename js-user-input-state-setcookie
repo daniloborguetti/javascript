@@ -1,5 +1,4 @@
 function formatStateCookie() {
-
   // Mapeamento de estados e seus códigos
   var stateMap = {
     'Acre': 'ac',
@@ -39,13 +38,13 @@ function formatStateCookie() {
     var stateSelect = stateInput.value.trim().toLowerCase(); // Convertendo para letras minúsculas
 
     // Verifica se o estado existe no mapeamento
-    if (states[stateSelect]) {
+    if (stateMap[stateSelect]) {
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadState=" + states[stateSelect] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      document.cookie = "LeadState=" + stateMap[stateSelect] + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-      return states[stateSelect];
+      return stateMap[stateSelect];
     } else {
       console.log('Estado não mapeado ou inválido.');
       return undefined; // Estado não encontrado no mapeamento
