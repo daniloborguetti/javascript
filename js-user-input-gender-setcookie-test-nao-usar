@@ -1,17 +1,22 @@
 function() {
   var nameField = document.querySelector('[id="name"]');
-  var name = nameField ? nameField.value : "";
+  var name = nameField ? nameField.value.trim() : "";  // Agora usando trim() para remover espaços extras
 
   // ATUALIZAÇÃO - PARA A EXECUÇÃO SE O CAMPO DO FORMULÁRIO FOR VAZIO
   if (!name) {
     return "";
   }
 
-  // Tratar o nome
+  // Tratar o nome removendo acentos e caracteres especiais
   var cleanedName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-ZÀ-ÿ ]/g, '');
   
   // Obter o primeiro nome
   var firstName = cleanedName.split(' ')[0];
+
+  if (!firstName) {
+    console.log('O primeiro nome está vazio após a limpeza.');
+    return ""; // Retorna vazio se não houver um primeiro nome válido
+  }
 
   // Fazer uma requisição para a API Genderize.io para obter o gênero associado ao nome
   var xhr = new XMLHttpRequest();
@@ -27,7 +32,7 @@ function() {
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
     var cookieValue = gender ? gender : "unknown"; // "male", "female", ou "unknown"
-    document.cookie = "LeadGender=" + cookieValue + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "LeadGender=" + encodeURIComponent(cookieValue) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
     if (gender === "male") {
       return "62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a";
