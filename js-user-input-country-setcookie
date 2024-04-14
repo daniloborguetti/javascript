@@ -1,29 +1,28 @@
 function formatCountrySetCookie() {
-
   // Mapeamento de países e seus códigos
-  var paises = {
+  var countries = {
     'Brasil': 'br'
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoPais = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
+  var countryInput = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
 
-  if (campoPais) {
-    var paisSelecionado = campoPais.value;
-    var paisFormatado = paisSelecionado.trim(); // Remove espaços em branco no início e no fim
+  // Verifica se countryInput não é nulo ou indefinido e se contém um valor não vazio
+  if (countryInput && countryInput.value.trim() !== '') {
+    var countrySelect = countryInput.value;
+    var countryFormatted = countrySelect.trim(); // Corrige o erro tipográfico: de 'countryFormated' para 'countryFormatted'
 
     // Verifica se o país existe no mapeamento
-    if (paises[paisFormatado]) {
-
+    if (countries[countryFormatted]) {
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadCountry=" + paises[paisFormatado] + "; expires=" + expirationDate.toUTCString() + "; path=/";
-      return paises[paisFormatado];
+      document.cookie = "LeadCountry=" + encodeURIComponent(countries[countryFormatted]) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      return countries[countryFormatted];
     } else {
-      return undefined;
+      return 'País não mapeado'; // Retorna mensagem de erro se o país não estiver no mapeamento
     }
   } else {
-    return undefined;
+    return 'Entrada inválida'; // Retorna mensagem de erro se o input for nulo ou o valor for vazio
   }
 }
