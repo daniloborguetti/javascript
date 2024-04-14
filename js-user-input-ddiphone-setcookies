@@ -1,6 +1,6 @@
-function capturarDDIETelefoneEArmazenarEmCookie() {
+function formatPhoneDDISetCookie() {
     // Mapeia as siglas dos países para seus respectivos DDIs
-    var ddiPorPais = {
+    var countryDDI = {
         "BR": "55",
         "AF": "93",
         "ZA": "27",
@@ -8,32 +8,33 @@ function capturarDDIETelefoneEArmazenarEmCookie() {
     };
 
     // Tenta encontrar o campo de telefone pelo ID
-    var phoneInput = document.getElementById('whatsapp-component-phone');
-    if (phoneInput) {
+    var phoneInput = document.getElementById('phone');
+    // Verifica se phoneInput não é nulo ou indefinido e se contém um valor não vazio
+    if (phoneInput && phoneInput.value.trim() !== '') {
         // Lê o atributo data-country do campo de telefone
-        var codigoPais = phoneInput.getAttribute('data-country');
+        var countryCode = phoneInput.getAttribute('data-country');  // Corrigido para data-country
         // Usa o código do país para encontrar o DDI correspondente na tabela de consulta
-        var ddi = ddiPorPais[codigoPais];
+        var ddi = countryDDI[countryCode];
         
         // Captura o valor do input do telefone, removendo caracteres não numéricos
-        var numeroTelefone = phoneInput.value.replace(/\D/g, '');
+        var phone = phoneInput.value.replace(/\D/g, '');
 
-        if (ddi && numeroTelefone) {
+        if (ddi && phone) {
             // Concatena o DDI e o número do telefone
-            var valorFinal = ddi + numeroTelefone;
+            var phoneDDI = ddi + phone;
 
             // Define o valor em um cookie com validade de 30 dias a partir da data atual
             var expirationDate = new Date();
             expirationDate.setDate(expirationDate.getDate() + 30);
-            document.cookie = "LeadPhone=" + valorFinal + "; expires=" + expirationDate.toUTCString() + "; path=/";
+            document.cookie = "LeadPhone=" + encodeURIComponent(phoneDDI) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-            return valorFinal;
+            return phoneDDI;
         } else {
             console.log('DDI ou número de telefone não encontrado.');
             return 'DDI ou número de telefone não encontrado'; // Ou retorne um valor padrão ou erro
         }
     } else {
-        console.log('Campo de telefone não encontrado.');
-        return 'Campo de telefone não encontrado'; // Ou retorne um valor padrão ou erro
+        console.log('Campo de telefone não encontrado ou valor vazio.');
+        return 'Campo de telefone não encontrado ou valor vazio'; // Ou retorne um valor padrão ou erro
     }
 }
