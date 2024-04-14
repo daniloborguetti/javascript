@@ -1,19 +1,26 @@
 function formatBirthdateSetCookie() {
-  var birthdate = document.querySelector('input[id="birthdate"]').value;
-  var partes = birthdate.split('/');
-  if (partes.length !== 3) {
-    return 'Data inválida';
+  var birthdateInput = document.querySelector('input[id="birthdate"]');
+
+  // Verifica se o campo de data de nascimento não é nulo ou indefinido e se contém um valor não vazio
+  if (!birthdateInput || birthdateInput.value.trim() === '') {
+    return 'Data inválida'; // Retorna mensagem de erro se o campo está vazio ou não existe
   }
 
-  var dia = partes[0].padStart(2, '0');
-  var mes = partes[1].padStart(2, '0');
+  var birthdate = birthdateInput.value.trim();
+  var partes = birthdate.split('/');
+  if (partes.length !== 3) {
+    return 'Data inválida'; // Retorna mensagem de erro se a data não está no formato esperado
+  }
+
+  var dia = partes[0].padStart(2, '0'); // Garante que o dia tenha dois dígitos
+  var mes = partes[1].padStart(2, '0'); // Garante que o mês tenha dois dígitos
   var ano = partes[2];
 
-  var dataFormatada = ano + mes + dia;
+  var dataFormatada = ano + mes + dia; // Formata a data no estilo AAAAMMDD
 
-  // Defina o cookie com nome "dataNascimento" com duração de 30 dias
+  // Define o cookie com nome "LeadBirthdate" com duração de 30 dias
   var expires = new Date();
-  expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000);
+  expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000); // Adiciona 30 dias à data atual
   document.cookie = 'LeadBirthdate=' + dataFormatada + '; expires=' + expires.toUTCString() + '; path=/';
 
   return dataFormatada;
