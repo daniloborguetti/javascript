@@ -3,18 +3,18 @@ function formatCitySetCookie() {
   // Substitua pela variável do seu formulário
   var cityInput = document.querySelector('[id="city"]');
   
-  // Verifica se cityInput é um objeto e não é nulo
-  if (typeof cityInput === 'object' && cityInput !== null) {
+  // Verifica se cityInput é um objeto, não é nulo e contém um valor não vazio
+  if (cityInput && cityInput.value.trim() !== '') {
     
-    // Converte para letras minúsculas e remove espaços
+    // Converte para letras minúsculas e remove todos os espaços
     var cityValue = cityInput.value.toLowerCase().replace(/\s/g, '');
 
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadCity=" + cityValue + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "LeadCity=" + encodeURIComponent(cityValue) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
     return cityValue;
   }
-  return undefined;
+  return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
 }
