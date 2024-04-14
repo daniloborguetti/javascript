@@ -1,29 +1,31 @@
 function formatLastNameSetCookie() {
-
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="fullname"]'); 
-  var name = nameField.value;
 
-  // Convertendo o nome para letras minúsculas
-  name = name.toLowerCase();
+  // Verifica se nameField não é nulo ou indefinido e se contém um valor não vazio
+  if (nameField && nameField.value.trim() !== '') {
+    var name = nameField.value.trim().toLowerCase(); // Convertendo o nome para letras minúsculas e removendo espaços em branco
 
-  // Dividindo o nome em partes usando o espaço em branco para separar
-  var names = name.split(' ');
+    // Dividindo o nome em partes usando o espaço em branco para separar
+    var names = name.split(' ');
 
-  // Verificando se há mais de um nome
-  if (names.length > 1) {
-    // Retornando o último nome em letras minúsculas
-    var lastname = names[names.length - 1].toLowerCase();
+    // Verificando se há mais de um nome
+    if (names.length > 1) {
+      // Retornando o último nome em letras minúsculas
+      var lastname = names[names.length - 1];
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadLastName=" + lastname + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+      document.cookie = "LeadLastName=" + encodeURIComponent(lastname) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
-    return lastname;
+      return lastname;
+    } else {
+      // Se houver apenas um nome, retorne uma string vazia
+      return '';
+    }
   } else {
-    // Se houver apenas um nome, retorne uma string vazia
-    return '';
+    console.log('Campo de nome não encontrado ou valor vazio.');
+    return ''; // Retorna uma string vazia se o input for nulo ou o valor for vazio
   }
 }
-
