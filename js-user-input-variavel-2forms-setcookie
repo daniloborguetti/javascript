@@ -1,14 +1,15 @@
 function() {
+
   // Seleciona os campos de input pelo ID
   var emailInput1 = document.getElementById('emailInput1'); // Substitua 'emailInput1' pelo ID correto do primeiro campo de e-mail
   var emailInput2 = document.getElementById('emailInput2'); // Substitua 'emailInput2' pelo ID correto do segundo campo de e-mail
 
   // Verifica se os campos existem e captura o valor do e-mail
   var email = '';
-  if (emailInput1 && emailInput1.value) {
-    email = emailInput1.value;
-  } else if (emailInput2 && emailInput2.value) {
-    email = emailInput2.value;
+  if (emailInput1 && emailInput1.value.trim() !== '') {
+    email = emailInput1.value.trim();
+  } else if (emailInput2 && emailInput2.value.trim() !== '') {
+    email = emailInput2.value.trim();
   }
 
   // Se um e-mail foi capturado, armazena em um cookie
