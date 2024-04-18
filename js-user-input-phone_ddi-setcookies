@@ -32,11 +32,9 @@ function formatPhoneDDISetCookie() {
 
             return phoneDDI;
         } else {
-            console.log('DDI ou número de telefone não encontrado.');
             return 'DDI ou número de telefone não encontrado'; // Ou retorne um valor padrão ou erro
         }
     } else {
-        console.log('Campo de telefone não encontrado ou valor vazio.');
-        return 'Campo de telefone não encontrado ou valor vazio'; // Ou retorne um valor padrão ou erro
+        return undefined; 
     }
 }
