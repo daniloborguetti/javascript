@@ -10,7 +10,7 @@ function formatCountrySetCookie() {
   // Verifica se countryInput não é nulo ou indefinido e se contém um valor não vazio
   if (countryInput && countryInput.value.trim() !== '') {
     var countrySelect = countryInput.value;
-    var countryFormatted = countrySelect.trim(); // Corrige o erro tipográfico: de 'countryFormated' para 'countryFormatted'
+    var countryFormatted = countrySelect.trim(); 
 
     // Verifica se o país existe no mapeamento
     if (countries[countryFormatted]) {
@@ -23,6 +23,6 @@ function formatCountrySetCookie() {
       return 'País não mapeado'; // Retorna mensagem de erro se o país não estiver no mapeamento
     }
   } else {
-    return 'Entrada inválida'; // Retorna mensagem de erro se o input for nulo ou o valor for vazio
+    return undefined; 
   }
 }
