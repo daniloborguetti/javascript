@@ -46,11 +46,9 @@ function formatStateCookie() {
 
       return stateMap[stateSelect];
     } else {
-      console.log('Estado não mapeado ou inválido.');
       return undefined; // Estado não encontrado no mapeamento
     }
   } else {
-    console.log('Campo de estado não encontrado ou valor vazio.');
-    return undefined; // Campo não encontrado ou valor vazio
+    return undefined; 
   }
 }
