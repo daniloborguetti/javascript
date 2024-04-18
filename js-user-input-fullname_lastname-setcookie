@@ -25,7 +25,6 @@ function formatLastNameSetCookie() {
       return '';
     }
   } else {
-    console.log('Campo de nome não encontrado ou valor vazio.');
-    return ''; // Retorna uma string vazia se o input for nulo ou o valor for vazio
+    return undefined;
   }
 }
