@@ -25,7 +25,6 @@ function formatFirstNameSetCookie() {
 
     return result;
   } else {
-    console.log('Campo de nome não encontrado ou valor vazio.');
-    return 'Campo de nome não encontrado ou valor vazio'; // Retorna uma mensagem de erro apropriada
+    return undefined; 
   }
 }
