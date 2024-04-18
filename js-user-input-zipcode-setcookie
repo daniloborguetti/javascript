@@ -1,5 +1,4 @@
 function formatZipCodeSetCookie() {
-
   // Substitua pela variável do seu formulário
   var zipcodeInput = document.querySelector('[id="zipcode"]');
 
@@ -24,6 +23,5 @@ function formatZipCodeSetCookie() {
   }
 
   // Retorna undefined se o input é nulo ou o valor é vazio
-  console.log('Campo de zipcode não encontrado ou valor vazio.');
   return undefined;
 }
