@@ -48,7 +48,6 @@ function formatStateSetCookie() {
 
         return stateAbbreviation;
     } else {
-        console.log('Campo de estado não encontrado ou valor vazio.');
         return undefined;
     }
 }
