@@ -1,5 +1,4 @@
 function formatVariableCookie() {
-
   // Substitua pela variável do seu formulário
   var variableInput = document.querySelector('[id="variavel"]'); 
 
@@ -14,7 +13,6 @@ function formatVariableCookie() {
 
     return value;
   } else {
-    console.log('Campo de variável não encontrado ou valor vazio.');
-    return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
+    return undefined; 
   }
 }
