@@ -41,5 +41,5 @@ function() {
     }
   }
 
-  return ""; // Retornar vazio para gênero desconhecido ou não identificado
+  return undefined; 
 }
