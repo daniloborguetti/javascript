@@ -14,5 +14,5 @@ function formatEmailSetCookie() {
 
     return emailValue;
   }
-  return undefined; // Retorna undefined se o input for nulo ou o valor for vazio
+  return undefined; 
 }
