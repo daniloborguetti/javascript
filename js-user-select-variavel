@@ -1,0 +1,16 @@
+function getCargoNaEmpresa() {
+  // Encontrar o elemento select pelo nome
+  var selectElement = document.querySelector('select[name="cargo-na-empresa"]');
+
+  // Verificar se o elemento select foi encontrado
+  if (selectElement) {
+    // Pegar o valor da opção selecionada
+    var selectedValue = selectElement.value;
+
+    // Retorna o valor selecionado
+    return selectedValue;
+  } else {
+    // Retorna undefined se o elemento select não for encontrado
+    return undefined;
+  }
+}
