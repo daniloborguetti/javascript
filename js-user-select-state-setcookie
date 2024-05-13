@@ -1,11 +1,11 @@
 function formatStateSetCookie() {
-    var e = document.getElementById("state"); // Substitua pela variável do seu formulário
+    var e = document.getElementById("region_id"); // Substitua pela variável do seu formulário
 
     // Verifica se o elemento stateInput não é nulo ou indefinido e se contém um valor não vazio
     if (e && e.options[e.selectedIndex]) {
-        var stateFullName = e.options[e.selectedIndex].text.trim(); // Assume que é um <select> e obtém o texto selecionado
+        var stateValue = e.options[e.selectedIndex].value; // Obtém o valor da opção selecionada
 
-        // Mapeamento de nomes completos de estados para siglas
+        // Mapeamento de IDs de estado para siglas
         var stateMap = {
             'Acre': 'ac',
             'Alagoas': 'al',
@@ -36,8 +36,8 @@ function formatStateSetCookie() {
             'Tocantins': 'to'
         };
 
-        // Converte o nome completo para a sigla usando o mapeamento
-        var stateAbbreviation = (stateMap[stateFullName] || 'desconhecido').toLowerCase(); // Converte para minúsculas
+        // Converte o valor numérico para a sigla usando o mapeamento
+        var stateAbbreviation = (stateMap[stateValue] || 'desconhecido').toLowerCase(); // Converte para minúsculas
 
         // Cria uma data para 30 dias a partir da data atual
         var dataExpiracao = new Date();
