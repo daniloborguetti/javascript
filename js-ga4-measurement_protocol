@@ -1,11 +1,11 @@
 {
-  "client_id": "{{firestore-client_id}}",
-  "timestamp_micros": "{{firestore-timestamp}}",
+  "client_id": "",
+  "timestamp_micros": "",
   "events": [{"name": "purchase",
               "params":{
-                    "session_id": "{{firestore-session_id}}",
-                    "page_location": "{{firestore-page_location}}",
-                    "session_number": "{{firestore-session_number}}",
+                    "session_id": "",
+                    "page_location": "",
+                    "session_number": "",
                     "items": [{"item_id": "",
                                "item_name": "",
                                "price": "",
