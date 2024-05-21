@@ -1,6 +1,6 @@
 function getCargoNaEmpresa() {
   // Encontrar o elemento select pelo nome
-  var selectElement = document.querySelector('select[name="varivael"]');
+  var selectElement = document.querySelector('select[name="variavel"]');
 
   // Verificar se o elemento select foi encontrado
   if (selectElement) {
