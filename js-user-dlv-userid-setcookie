@@ -4,8 +4,7 @@ function formatUserId() {
   
   // Verifique se a variável está definida e não é nula
   if (UserId) {
-    // Converta para letras minúsculas
-    var formattedUserId = UserId.toLowerCase();
+    var formattedUserId = UserId;
 
     // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
