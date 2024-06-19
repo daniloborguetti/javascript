@@ -1,0 +1,32 @@
+function formatPhoneSetCookie() {
+  // Captura os campos de DDD e telefone pelo ID
+  var dddInput = document.querySelector('[id="ddd"]');
+  var phoneInput = document.querySelector('[id="phone"]');
+
+  // Verifica se ambos os campos não são nulos ou indefinidos e contêm valores não vazios
+  if (dddInput && dddInput.value.trim() !== '' && phoneInput && phoneInput.value.trim() !== '') {
+    var dddValue = dddInput.value.trim();
+    var phoneValue = phoneInput.value.trim();
+
+    // Remove caracteres não numéricos e espaços
+    var dddLimpo = dddValue.replace(/\D/g, '');
+    var numeroLimpo = phoneValue.replace(/\D/g, '');
+
+    // Combina DDD e telefone
+    var phoneNumber = dddLimpo + numeroLimpo;
+
+    // Adiciona o código do país 55 (Brasil) se necessário
+    if (!phoneNumber.startsWith('55')) {
+      phoneNumber = '55' + phoneNumber;
+    }
+
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadPhone=" + encodeURIComponent(phoneNumber) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    return phoneNumber;
+  }
+
+  return undefined; 
+}
