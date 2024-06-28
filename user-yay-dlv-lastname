@@ -1,0 +1,16 @@
+function() {
+  var questionList = {{dlv-data.questionList}};
+  for (var i = 0; i < questionList.length; i++) {
+    if (questionList[i].fieldId === 'lastname') {
+      var content = questionList[i].content.toLowerCase();
+      
+      // Armazenar o valor em um cookie com duração de 30 dias
+      var date = new Date();
+      date.setTime(date.getTime() + (30*24*60*60*1000));
+      var expires = "expires=" + date.toUTCString();
+      document.cookie = "LeadLastName=" + content + ";" + expires + ";path=/";
+      return content;
+    }
+  }
+  return '';
+}
