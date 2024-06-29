@@ -1,7 +1,7 @@
 function() {
   var questionList = {{dlv-data.questionList}};
   for (var i = 0; i < questionList.length; i++) {
-    if (questionList[i].fieldId === '667da925c5f702b8d30c2a41') {
+    if (questionList[i].fieldId === 'phone') {
       var content = questionList[i].content.replace(/\D/g, ''); // Remove caracteres não numéricos
      
       // Armazenar o valor em um cookie com duração de 30 dias
