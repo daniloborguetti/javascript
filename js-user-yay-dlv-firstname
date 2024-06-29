@@ -1,5 +1,5 @@
 function() {
-  var questionList = {{dlv-data.questionList}};
+  var questionList = {{user-yay-dlv-data.questionList}};
   for (var i = 0; i < questionList.length; i++) {
     if (questionList[i].fieldId === 'firstname') {
       var content = questionList[i].content.toLowerCase();
