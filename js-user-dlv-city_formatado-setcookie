@@ -1,6 +1,8 @@
 function () {
-  var str = {{dlv city}}; // Substitua pela variável da sua Camada de Dados
-  var parsed = str.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+  var str = {{dlv-user_data.user_city}}; // Substitua pela variável da sua Camada de Dados
+
+  // Normaliza, remove acentos, caracteres especiais e converte para letras minúsculas
+  var parsed = str.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '').toLowerCase();
 
   // Define o valor em um cookie com validade de 30 dias a partir da data atual
   var expirationDate = new Date();
