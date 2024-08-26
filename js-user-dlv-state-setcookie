@@ -30,7 +30,7 @@ function formatState() {
   };
 
   // Substitua pela variável real da sua Camada de Dados ou método de obtenção do estado
-  var State = "{{user-dlv-state}}"; // exemplo de uso
+  var State = "{{dlv-state}}"; 
 
   // Converter State para minúsculas para correspondência insensível a maiúsculas
   var stateKey = State.toLowerCase();
