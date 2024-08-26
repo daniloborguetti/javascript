@@ -1,6 +1,6 @@
 function formatLastNameSetCookie() {
   // Substitua pela variável da sua Camada de Dados
-  var nameField = {{dlv-user_data.user_name}}; 
+  var nameField = {{dlv-lastname}}; 
 
   // Verifica se nameField não é nulo, indefinido e se contém um valor não vazio
   if (nameField && nameField.trim() !== '') {
