@@ -1,5 +1,5 @@
 function getName() {
-  var nameField = document.querySelector('[id="fullname"]'); // Substitua pela variável do seu formulário
+  var nameField = {{dlv-fullname}}; // Substitua pela variável da camada de dados
   var name = nameField.value;
  
   // Dividindo o nome em partes usando o espaço em branco para separar
