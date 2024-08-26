@@ -1,28 +1,24 @@
 function formatFirstNameSetCookie() {
-  // Substitua pelo seletor correto ou método de obtenção do valor do campo nome
-  var nameField = {{user-dlv-fullname}}; // Exemplo de acesso direto
-  if (!nameField) {
-    return null; // Retorna null se o campo de nome não for encontrado
+  // Substitua pela variável da sua Camada de Dados
+  var nameField = {{dlv-user_data.user_name}};
+  
+  // Verifica se nameField não é nulo, indefinido e se contém um valor não vazio
+  if (nameField && nameField.trim() !== '') {
+    var fullname = nameField.trim().toLowerCase();  // Convertendo o nome para letras minúsculas e removendo espaços em branco
+
+    // Dividindo o nome em partes usando o espaço em branco para separar
+    var names = fullname.split(' ');
+
+    // Capturando apenas o primeiro nome
+    var firstName = names[0];
+
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
+    document.cookie = "LeadFirstName=" + encodeURIComponent(firstName) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    return firstName;
+  } else {
+    return undefined; 
   }
-
-  var name = nameField.value.toLowerCase(); // Convertendo o nome para letras minúsculas
-
-  // Dividindo o nome em partes usando o espaço em branco para separar
-  var names = name.split(' ');
-
-  // Verificando se há mais de um nome
-  if (names.length > 1) {
-    // Removendo o último nome
-    names.pop();
-  }
-
-  // Juntando os nomes novamente em uma única string
-  var result = names.join(' ');
-
-  // Define o valor em um cookie com validade de 30 dias a partir da data atual
-  var expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-  document.cookie = "LeadFirstName=" + encodeURIComponent(result) + "; expires=" + expirationDate.toUTCString() + "; path=/";
-
-  return result;
 }
