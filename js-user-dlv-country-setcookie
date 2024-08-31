@@ -1,9 +1,4 @@
 function formatCountry() {
-// Mapeamento de países e seus códigos
-  var paises = {
-    'Brasil': 'br'
-  };
-
   // Substitua pela variável da sua Camada de Dados
   var Country = {{dlv-country}};
   
@@ -15,7 +10,7 @@ function formatCountry() {
     // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadCountry=" + formattedCountry + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "LeadCountry=" + encodeURIComponent(formattedCountry) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
     return formattedCountry;
   } else {
