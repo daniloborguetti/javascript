@@ -1,0 +1,15 @@
+function () {
+  if ({{dlv-variavel}}) {
+    
+    // Se tiver informação no DataLayer executa, senão proximo
+    return {{dlv-variavel}};
+  
+  } else if ({{cookie-variavel}}) {
+    
+    // Se tiver informação nos Cookies executa, senão vazio
+    return {{cookie-variavel}};
+
+  } else {
+    return undefined;
+  }
+}
