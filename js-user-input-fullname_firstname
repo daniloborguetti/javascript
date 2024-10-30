@@ -1,5 +1,4 @@
 function formatFirstName() {
-
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="fullname"]'); 
   var name = nameField.value;
@@ -10,15 +9,16 @@ function formatFirstName() {
   // Dividindo o nome em partes usando o espaço em branco para separar
   var names = name.split(' ');
 
-  // Verificando se há mais de um nome
+  // Verificando se há mais de um nome e removendo o último nome
   if (names.length > 1) {
-    // Removendo o último nome
     names.pop();
   }
 
   // Juntando os nomes novamente em uma única string
   var result = names.join(' ');
 
+  // Removendo acentos e caracteres especiais
+  result = result.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z\s]/g, "");
+
   return result;
 }
-
