@@ -11,8 +11,11 @@ function formatLastNameSetCookie() {
 
     // Verificando se há mais de um nome
     if (names.length > 1) {
-      // Retornando o último nome em letras minúsculas
+      // Capturando o último nome
       var lastname = names[names.length - 1];
+
+      // Removendo acentos e caracteres especiais do último nome
+      lastname = lastname.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
 
       // Define o valor em um cookie com validade de 30 dias a partir da data atual
       var expirationDate = new Date();
