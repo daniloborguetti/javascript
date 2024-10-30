@@ -4,13 +4,16 @@ function formatFirstNameSetCookie() {
   
   // Verifica se nameField não é nulo ou indefinido e se contém um valor não vazio
   if (nameField && nameField.value.trim() !== '') {
-    var fullname = nameField.value.trim().toLowerCase();  // Convertendo o nome para letras minúsculas e removendo espaços em branco
+    var fullname = nameField.value.trim().toLowerCase(); // Convertendo o nome para letras minúsculas e removendo espaços em branco
 
     // Dividindo o nome em partes usando o espaço em branco para separar
     var names = fullname.split(' ');
 
     // Capturando apenas o primeiro nome
     var firstName = names[0];
+
+    // Removendo acentos e caracteres especiais do primeiro nome
+    firstName = firstName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
 
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
