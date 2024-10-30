@@ -7,6 +7,9 @@ function formatFirstName() {
     // Converta para letras minúsculas
     var formattedFirstName = FirstName.toLowerCase();
 
+    // Remova acentos e caracteres especiais
+    formattedFirstName = formattedFirstName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+
     // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
