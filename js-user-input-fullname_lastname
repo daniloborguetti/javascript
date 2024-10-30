@@ -1,5 +1,4 @@
 function formatLastname() {
-
   // Substitua pela variável do seu formulário
   var nameField = document.querySelector('[id="fullname"]'); 
   var name = nameField.value;
@@ -9,8 +8,11 @@ function formatLastname() {
 
   // Verificando se há mais de um nome
   if (names.length > 1) {
-    // Retornando o último nome em letras minúsculas
+    // Capturando o último nome e convertendo para letras minúsculas
     var lastname = names[names.length - 1].toLowerCase();
+
+    // Removendo acentos e caracteres especiais do último nome
+    lastname = lastname.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
 
     return lastname;
   } else {
