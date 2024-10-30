@@ -12,6 +12,9 @@ function formatFirstNameSetCookie() {
     // Capturando apenas o primeiro nome
     var firstName = names[0];
 
+    // Removendo acentos e caracteres especiais do primeiro nome
+    firstName = firstName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+
     // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
