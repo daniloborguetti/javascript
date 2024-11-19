@@ -1,6 +1,7 @@
 function getPeriodOfDay() {
     var now = new Date();
-    var hours = now.getHours();
+    var hours = now.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(" ")[1].split(":")[0];
+    hours = parseInt(hours, 10);
 
     if (hours >= 6 && hours < 12) {
         return "manhã";
