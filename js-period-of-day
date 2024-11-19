@@ -1,0 +1,14 @@
+function getPeriodOfDay() {
+    var now = new Date();
+    var hours = now.getHours();
+
+    if (hours >= 6 && hours < 12) {
+        return "manhã";
+    } else if (hours >= 12 && hours < 18) {
+        return "tarde";
+    } else if (hours >= 18 && hours < 24) {
+        return "noite";
+    } else {
+        return "madrugada";
+    }
+}
