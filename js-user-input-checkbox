@@ -1,11 +1,4 @@
-function() {
-  // Obtém a referência para a caixa de seleção pelo ID
-  var checkbox = document.getElementById("checkboxid"); // Substitua pela variável do seu formulário
-
-  // Verifica se a caixa de seleção está marcada ou não
-  if (checkbox.checked) {
-    return "checked";
-  } else {
-    return "not checked";
-  }
+function getCheckboxValue() {
+    var checkbox = document.querySelector('input[name="polticas-de-privacidade"]');
+    return checkbox ? checkbox.checked : false;
 }
