@@ -1,4 +1,4 @@
 function getCheckboxValue() {
     var checkbox = document.querySelector('input[name="polticas-de-privacidade"]');
-    return checkbox ? checkbox.checked : false;
+    return checkbox ? checkbox.checked : true;
 }
