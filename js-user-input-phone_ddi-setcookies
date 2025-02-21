@@ -4,37 +4,48 @@ function formatPhoneDDISetCookie() {
         "BR": "55",
         "AF": "93",
         "ZA": "27",
+        // Adicione outros DDIs conforme necessário
     };
 
     // Tenta encontrar o campo de telefone pelo ID
     var phoneInput = document.getElementById('phone');
 
-    // Verifica se phoneInput não é nulo ou indefinido e se contém um valor não vazio
+    // Verifica se o campo existe e contém um valor
     if (phoneInput && phoneInput.value.trim() !== '') {
-
         // Lê o atributo data-country do campo de telefone
-        var countryCode = phoneInput.getAttribute('data-country');
+        var countryCode = phoneInput.getAttribute('data-country') || "";
 
-        // Usa o código do país para encontrar o DDI correspondente na tabela de consulta
-        var ddi = countryDDIMap[countryCode];
-        
+        // Obtém o DDI do país
+        var ddi = countryDDIMap[countryCode] || "";
+
         // Captura o valor do input do telefone, removendo caracteres não numéricos
         var phone = phoneInput.value.replace(/\D/g, '');
 
+        // Só define o cookie se DDI e número forem válidos
         if (ddi && phone) {
-            // Concatena o DDI e o número do telefone
             var phoneDDI = ddi + phone;
 
-            // Define o valor em um cookie com validade de 30 dias a partir da data atual
+            // Define a expiração do cookie para 30 dias
             var expirationDate = new Date();
             expirationDate.setDate(expirationDate.getDate() + 30);
-            document.cookie = "LeadPhone=" + encodeURIComponent(phoneDDI) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+            // Obtém o domínio principal para cobrir subdomínios
+            var domainParts = location.hostname.split('.');
+            var domain = domainParts.length > 2 
+                ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+                : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+            // Define o cookie para todo o domínio e subdomínios
+            document.cookie = "LeadPhone=" + encodeURIComponent(phoneDDI) + 
+                              "; expires=" + expirationDate.toUTCString() + 
+                              "; path=/; domain=" + domain + 
+                              "; Secure; SameSite=None;";
 
             return phoneDDI;
         } else {
-            return 'DDI ou número de telefone não encontrado'; // Ou retorne um valor padrão ou erro
+            return 'DDI ou número de telefone não encontrado';
         }
-    } else {
-        return undefined; 
     }
+    
+    return undefined; 
 }
