@@ -1,25 +1,20 @@
 function formatCountry() {
-
   // Mapeamento de países e seus códigos
   var paises = {
     'Brasil': 'br'
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var campoPais = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
+  var country = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
 
-  if (campoPais) {
-    var paisSelecionado = campoPais.value;
-    var paisFormatado = paisSelecionado.trim(); // Remove espaços em branco no início e no fim
+  if (country) {
+    var paisSelecionado = country.value.trim(); // Remove espaços em branco no início e no fim
 
-    // Verifica se o país existe no mapeamento
-    if (paises[paisFormatado]) {
-      
-      return paises[paisFormatado];
-    } else {
-      return undefined;
+    // Verifica se o país existe no mapeamento e retorna o código correspondente
+    if (paises[paisSelecionado]) {
+      return paises[paisSelecionado];
     }
-  } else {
-    return undefined;
   }
+  
+  return undefined;
 }
