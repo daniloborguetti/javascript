@@ -1,16 +1,27 @@
 function formatState() {
   // Substitua pela variável real da sua Camada de Dados ou método de obtenção do estado
-  var State = "{{dlv-state}}"; 
+  var state = "{{dlv-state}}"; 
 
-  // Verifica se a variável State está definida e não é nula
-  if (State) {
-    // Converter State para minúsculas para consistência
-    var formattedState = State.toLowerCase();
+  // Verifica se a variável state está definida e não é nula
+  if (state) {
+    // Converter state para minúsculas para consistência
+    var formattedState = state.toLowerCase();
 
-    // Armazena o valor em um cookie com duração de 30 dias
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadState=" + encodeURIComponent(formattedState) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadState=" + encodeURIComponent(formattedState) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return formattedState;
   } else {
