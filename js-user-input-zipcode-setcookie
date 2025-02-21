@@ -6,22 +6,33 @@ function formatZipCodeSetCookie() {
   if (zipcodeInput && zipcodeInput.value.trim() !== '') {
     var zipcodeValue = zipcodeInput.value.trim();
 
-    // Extrai os primeiros 5 caracteres numéricos
-    var zipcodeFormatted = zipcodeValue.match(/\d{5}/);
+    // Remove caracteres não numéricos e captura os primeiros 5 a 8 dígitos (para suportar CEPs no formato XXXXX-XXX)
+    var zipcodeFormatted = zipcodeValue.replace(/\D/g, '').slice(0, 8);
 
-    if (zipcodeFormatted) {
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    if (zipcodeFormatted.length >= 5) {
+      // Define a expiração do cookie para 30 dias a partir de agora
       var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadZipCode=" + zipcodeFormatted[0] + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      expirationDate.setDate(expirationDate.getDate() + 30);
 
-      return zipcodeFormatted[0];
+      // Obtém o domínio principal para cobrir subdomínios
+      var domainParts = location.hostname.split('.');
+      var domain = domainParts.length > 2 
+          ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+          : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+      // Define o cookie para todo o domínio e subdomínios
+      document.cookie = "LeadZipCode=" + encodeURIComponent(zipcodeFormatted) + 
+                        "; expires=" + expirationDate.toUTCString() + 
+                        "; path=/; domain=" + domain + 
+                        "; Secure; SameSite=None;";
+
+      return zipcodeFormatted;
     } else {
-      // Retorna uma string vazia se não encontrar números
+      // Retorna uma string vazia se não encontrar um CEP válido
       return "";
     }
   }
 
-  // Retorna undefined se o input é nulo ou o valor é vazio
+  // Retorna undefined se o input for nulo ou o valor for vazio
   return undefined;
 }
