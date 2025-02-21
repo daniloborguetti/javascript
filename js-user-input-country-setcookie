@@ -5,20 +5,31 @@ function formatCountrySetCookie() {
   };
 
   // Seletor do campo de entrada - substitua pelo seu seletor
-  var countryInput = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
+  var country = document.querySelector('[id="country"]'); // Substitua pela variável do seu formulário
 
-  // Verifica se countryInput não é nulo ou indefinido e se contém um valor não vazio
-  if (countryInput && countryInput.value.trim() !== '') {
-    var countrySelect = countryInput.value;
-    var countryFormatted = countrySelect.trim(); 
+  // Verifica se country não é nulo, indefinido e se contém um valor não vazio
+  if (country && country.value.trim() !== '') {
+    var countrySelect = country.value.trim(); // Remove espaços extras
 
     // Verifica se o país existe no mapeamento
-    if (countries[countryFormatted]) {
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    if (countries[countrySelect]) {
+      // Define a expiração do cookie para 30 dias a partir da data atual
       var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadCountry=" + encodeURIComponent(countries[countryFormatted]) + "; expires=" + expirationDate.toUTCString() + "; path=/";
-      return countries[countryFormatted];
+      expirationDate.setDate(expirationDate.getDate() + 30);
+
+      // Obtém o domínio principal para cobrir subdomínios
+      var domainParts = location.hostname.split('.');
+      var domain = domainParts.length > 2 
+          ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+          : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+      // Define o cookie para todo o domínio e subdomínios
+      document.cookie = "LeadCountry=" + encodeURIComponent(countries[countrySelect]) + 
+                        "; expires=" + expirationDate.toUTCString() + 
+                        "; path=/; domain=" + domain + 
+                        "; Secure; SameSite=None;";
+
+      return countries[countrySelect];
     } else {
       return 'País não mapeado'; // Retorna mensagem de erro se o país não estiver no mapeamento
     }
