@@ -1,19 +1,22 @@
 function formatFirstNameSetCookie() {
   // Substitua pela variável da sua Camada de Dados
-  var nameField = {{dlv-fullname}};
+  var firstname = {{dlv-fullname}};
+  
+  // Verifica se firstname não é nulo, indefinido e se contém um valor não vazio
+  if (firstname && firstname.trim() !== '') {
+    var fullname = firstname.trim().toLowerCase();  // Convertendo o nome para letras minúsculas e removendo espaços em branco
 
-  // Verifica se nameField está definido, é uma string válida e não está vazia
-  if (nameField && typeof nameField === "string" && nameField.trim() !== "") {
-    var fullname = nameField.trim().toLowerCase();
+    // Dividindo o nome em partes usando o espaço em branco para separar
+    var names = fullname.split(' ');
 
-    // Divide o nome completo e captura apenas o primeiro nome
-    var firstName = fullname.split(' ')[0]
+    // Capturando apenas o primeiro nome
+    var formattedFirstName = names[0]
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
       .replace(/[^a-zA-Z]/g, ""); // Mantém apenas letras
 
-    // Define a expiração do cookie para 30 dias a partir de agora
+    // Define o valor em um cookie com validade de 30 dias a partir da data atual
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
+    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
 
     // Obtém o domínio principal para cobrir subdomínios
     var domainParts = location.hostname.split('.');
@@ -22,13 +25,13 @@ function formatFirstNameSetCookie() {
         : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
 
     // Define o cookie para todo o domínio e subdomínios
-    document.cookie = "LeadFirstName=" + encodeURIComponent(firstName) + 
+    document.cookie = "LeadFirstName=" + encodeURIComponent(formattedFirstName) + 
                       "; expires=" + expirationDate.toUTCString() + 
                       "; path=/; domain=" + domain + 
                       "; Secure; SameSite=None;";
 
-    return firstName;
+    return formattedFirstName;
+  } else {
+    return undefined; 
   }
-
-  return undefined; 
 }
