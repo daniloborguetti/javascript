@@ -1,20 +1,30 @@
 function formatCitySetCookie() {
- 
   // Substitua pela variável do seu formulário
-  var cityInput = document.querySelector('[id="city"]');
-  
-  // Verifica se cityInput é um objeto, não é nulo e contém um valor não vazio
-  if (cityInput && cityInput.value.trim() !== '') {
-    
-    // Converte para letras minúsculas e remove todos os espaços
-    var cityValue = cityInput.value.toLowerCase().replace(/\s/g, '');
+  var city = document.querySelector('[id="city"]');
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+  // Verifica se city é um objeto válido, não é nulo e contém um valor não vazio
+  if (city && city.value.trim() !== '') {
+    // Converte para letras minúsculas e remove todos os espaços extras
+    var cityValue = city.value.trim().toLowerCase().replace(/\s+/g, '');
+
+    // Define a expiração do cookie para 30 dias a partir da data atual
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadCity=" + encodeURIComponent(cityValue) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadCity=" + encodeURIComponent(cityValue) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return cityValue;
   }
-  return undefined; 
+  
+  return undefined;
 }
