@@ -1,19 +1,30 @@
 function formatZipCode() {
   // Substitua pela variável da sua Camada de Dados
-  var ZipCode = {{dlv-zipcode}};
+  var zipcode = {{dlv-zipcode}};
   
   // Verifique se a variável está definida e não é nula
-  if (ZipCode) {
+  if (zipcode) {
     // Remova qualquer caractere não numérico
-    var cleanedZipcode = ZipCode.replace(/\D/g, '');
+    var cleanedZipcode = zipcode.replace(/\D/g, '');
 
     // Pegue os primeiros 5 dígitos do CEP
     var firstFiveDigits = cleanedZipcode.substring(0, 5);
 
-    // Armazene o valor em um cookie com duração de 30 dias
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadZipCode=" + firstFiveDigits + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadZipCode=" + encodeURIComponent(firstFiveDigits) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return firstFiveDigits;
   } else {
