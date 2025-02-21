@@ -1,23 +1,37 @@
 function formatEmailHashSetCookie() {
-
   // Substitua pela variável de captura
   var email = "{{user-input-email}}"; // Certifique-se de que essa substituição seja feita corretamente no contexto de uso real
-  
-  // Calculando o hash SHA256 
-  var hashedEmail = CryptoJS.SHA256(email).toString();
 
-  // Verifica se hashedEmail não é nulo ou indefinido e se contém um valor não vazio
+  // Verifica se o email é válido antes de calcular o hash
+  if (!email || typeof email !== "string" || email.trim() === "") {
+    console.error("Erro: E-mail inválido ou não fornecido.");
+    return "";
+  }
+
+  // Calculando o hash SHA256
+  var hashedEmail = CryptoJS.SHA256(email.trim().toLowerCase()).toString();
+
+  // Verifica se hashedEmail foi gerado corretamente
   if (!hashedEmail) {
     console.error("Erro: O hash do e-mail não foi gerado corretamente.");
-    return ""; // Retorna uma string vazia ou algum valor de erro apropriado
+    return "";
   }
 
   // Criando a data de expiração para o cookie
   var expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30); // Define a validade do cookie para 30 dias
 
-  // Definindo o cookie
-  document.cookie = "LeadEmailHash=" + encodeURIComponent(hashedEmail) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+  // Obtém o domínio principal para cobrir subdomínios
+  var domainParts = location.hostname.split('.');
+  var domain = domainParts.length > 2 
+      ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+      : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+  // Definindo o cookie para todo o domínio e subdomínios
+  document.cookie = "LeadEmailHash=" + encodeURIComponent(hashedEmail) + 
+                    "; expires=" + expirationDate.toUTCString() + 
+                    "; path=/; domain=" + domain + 
+                    "; Secure; SameSite=None;";
 
   return hashedEmail;
 }
