@@ -1,19 +1,30 @@
 function formatCountry() {
   // Substitua pela variável da sua Camada de Dados
   var Country = {{dlv-country}};
-  
-  // Verifique se a variável está definida e não é nula
-  if (Country) {
-    // Converta para letras minúsculas
-    var formattedCountry = Country.toLowerCase();
 
-    // Armazene o valor em um cookie com duração de 30 dias
+  // Verifique se a variável está definida e é uma string válida
+  if (Country && typeof Country === "string" && Country.trim() !== "") {
+    // Converte para letras minúsculas e remove espaços extras
+    var formattedCountry = Country.trim().toLowerCase();
+
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadCountry=" + encodeURIComponent(formattedCountry) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadCountry=" + encodeURIComponent(formattedCountry) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return formattedCountry;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia
   }
+
+  return null; // Retorna null se a variável estiver vazia ou indefinida
 }
