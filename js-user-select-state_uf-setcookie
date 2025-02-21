@@ -1,11 +1,28 @@
 function getSelectedState() {
-    var selectElement = document.getElementById('state'); // Substitua 'stateSelect' pelo ID do seu elemento select
-    var selectedValue = selectElement.value.toLowerCase();
+    var selectElement = document.getElementById('state'); // Substitua 'state' pelo ID correto do seu elemento select
     
-    // Cria o cookie com duração de 30 dias
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadState=" + selectedValue + ";expires=" + expirationDate.toUTCString() + ";path=/";
-    
-    return selectedValue;
+    // Verifica se o select existe e tem um valor selecionado
+    if (selectElement && selectElement.value.trim() !== '') {
+        var selectedValue = selectElement.value.trim().toLowerCase();
+
+        // Define a expiração do cookie para 30 dias a partir de agora
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 30);
+
+        // Obtém o domínio principal para cobrir subdomínios
+        var domainParts = location.hostname.split('.');
+        var domain = domainParts.length > 2 
+            ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+            : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+        // Define o cookie para todo o domínio e subdomínios
+        document.cookie = "LeadState=" + encodeURIComponent(selectedValue) + 
+                          "; expires=" + expirationDate.toUTCString() + 
+                          "; path=/; domain=" + domain + 
+                          "; Secure; SameSite=None;";
+
+        return selectedValue;
+    }
+
+    return undefined;
 }
