@@ -1,21 +1,31 @@
 function formatEmailSetCookie() {
-
     // Tenta encontrar o primeiro campo de e-mail pelo ID
-    var emailInput = document.querySelector('[id="email1"]');
+    var email = document.querySelector('[id="email1"]');
 
     // Se o primeiro campo não existir ou estiver vazio, tenta encontrar o segundo campo de e-mail
-    if (!emailInput || emailInput.value.trim() === '') {
-        emailInput = document.querySelector('[id="email2"]');
+    if (!email || email.value.trim() === '') {
+        email = document.querySelector('[id="email2"]');
     }
 
     // Converte para letras minúsculas e define o cookie se um valor estiver disponível
-    if (emailInput && emailInput.value.trim()) {
-        var emailValue = emailInput.value.trim().toLowerCase();
+    if (email && email.value.trim()) {
+        var emailValue = email.value.trim().toLowerCase();
 
-        // Define o valor em um cookie com validade de 30 dias a partir da data atual
+        // Define a expiração do cookie para 30 dias a partir da data atual
         var expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-        document.cookie = "LeadEmail=" + encodeURIComponent(emailValue) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+        expirationDate.setDate(expirationDate.getDate() + 30);
+
+        // Obtém o domínio principal para cobrir subdomínios
+        var domainParts = location.hostname.split('.');
+        var domain = domainParts.length > 2 
+            ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+            : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+        // Define o cookie para todo o domínio e subdomínios
+        document.cookie = "LeadEmail=" + encodeURIComponent(emailValue) + 
+                          "; expires=" + expirationDate.toUTCString() + 
+                          "; path=/; domain=" + domain + 
+                          "; Secure; SameSite=None;";
 
         return emailValue;
     }
