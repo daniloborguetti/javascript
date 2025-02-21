@@ -1,26 +1,37 @@
 function formatPhoneSetCookie() {
-  // Substitua pela variável do seu formulário
+  // Seleciona o campo pelo ID
   var phoneInput = document.querySelector('[id="phone"]');
 
-  // Verifica se phoneInput não é nulo ou indefinido e se contém um valor não vazio
+  // Verifica se o campo existe e contém um valor
   if (phoneInput && phoneInput.value.trim() !== '') {
-    var phoneValue = phoneInput.value;
+    var phoneValue = phoneInput.value.trim();
 
-    // Remove caracteres não numéricos e espaços
+    // Remove todos os caracteres não numéricos
     var numeroLimpo = phoneValue.replace(/\D/g, '');
 
-    // Adiciona o código do país 55 (Brasil) se necessário
+    // Adiciona o código do país 55 (Brasil) se o número não iniciar com 55
     if (!numeroLimpo.startsWith('55')) {
       numeroLimpo = '55' + numeroLimpo;
     }
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadPhone=" + encodeURIComponent(numeroLimpo) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadPhone=" + encodeURIComponent(numeroLimpo) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return numeroLimpo;
   }
 
-  return undefined; 
+  return undefined;
 }
