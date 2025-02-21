@@ -1,19 +1,24 @@
 function getLastname() {
-  var nameField = {{dlv-fullname}}; // Substitua pela variável da camada de dados
-  var name = nameField.value;
+  var lastname = {{dlv-fullname}}; // Substitua pela variável da camada de dados
 
-  // Dividindo o nome em partes usando o espaço em branco para separar
-  var names = name.split(' ');
+  // Verifica se lastname está definido, é uma string válida e não está vazia
+  if (lastname && typeof lastname === "string" && lastname.trim() !== "") {
+    var name = lastname.trim();
 
-  // Verificando se há mais de um nome
-  if (names.length > 1) {
-    // Captura o último nome, formata para letras minúsculas e remove acentos e caracteres especiais
-    var lastName = names[names.length - 1].toLowerCase();
-    lastName = lastName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+    // Divide o nome completo em partes
+    var names = name.split(/\s+/); // Divide removendo espaços extras
 
-    return lastName;
-  } else {
-    // Se houver apenas um nome, retorne uma string vazia
-    return '';
+    // Verifica se há mais de um nome
+    if (names.length > 1) {
+      // Captura o último nome, formata para letras minúsculas e remove acentos e caracteres especiais
+      var lastName = names[names.length - 1].toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+        .replace(/[^a-zA-Z]/g, ""); // Remove caracteres especiais
+
+      return lastName;
+    }
   }
+
+  // Retorna string vazia se não houver sobrenome ou nome inválido
+  return '';
 }
