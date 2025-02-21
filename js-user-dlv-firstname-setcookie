@@ -1,22 +1,32 @@
 function formatFirstName() {
   // Substitua pela variável da sua Camada de Dados
   var FirstName = {{dlv-firstname}};
-  
-  // Verifique se a variável está definida e não é nula
-  if (FirstName) {
-    // Converta para letras minúsculas
-    var formattedFirstName = FirstName.toLowerCase();
 
-    // Remova acentos e caracteres especiais
-    formattedFirstName = formattedFirstName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+  // Verifique se a variável está definida e é uma string válida
+  if (FirstName && typeof FirstName === "string" && FirstName.trim() !== "") {
+    // Converte para letras minúsculas e remove espaços extras
+    var formattedFirstName = FirstName.trim().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^a-zA-Z]/g, ""); // Remove caracteres especiais
 
-    // Armazene o valor em um cookie com duração de 30 dias
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadFirstName=" + formattedFirstName + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadFirstName=" + encodeURIComponent(formattedFirstName) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return formattedFirstName;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia
   }
+
+  return null; // Retorna null se a variável estiver vazia ou indefinida
 }
