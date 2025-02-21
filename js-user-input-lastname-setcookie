@@ -1,18 +1,31 @@
 function formatLastNameSetCookie() {
-  // Substitua pela variável do seu formulário
+  // Seleciona o campo pelo ID
   var lastnameInput = document.querySelector('[id="lastname"]');
 
-  // Verifica se lastnameInput não é nulo ou indefinido e se contém um valor não vazio
+  // Verifica se o campo existe e contém um valor
   if (lastnameInput && lastnameInput.value.trim() !== '') {
-    var lastnameValue = lastnameInput.value.toLowerCase(); // Converte para letras minúsculas
+    var lastnameValue = lastnameInput.value.trim().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^a-zA-Z]/g, ""); // Mantém apenas letras
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadLastName=" + lastnameValue + "; expires=" + expirationDate.toUTCString() + "; path=/"; 
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadLastName=" + encodeURIComponent(lastnameValue) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return lastnameValue;
   }
 
   return undefined;
-} 
+}
