@@ -1,33 +1,39 @@
 function formatLastNameSetCookie() {
-  // Substitua pela variável do seu formulário
+  // Seleciona o campo pelo ID (substitua conforme necessário)
   var nameField = document.querySelector('[id="fullname"]'); 
 
-  // Verifica se nameField não é nulo ou indefinido e se contém um valor não vazio
+  // Verifica se o campo existe e tem um valor
   if (nameField && nameField.value.trim() !== '') {
-    var name = nameField.value.trim().toLowerCase(); // Convertendo o nome para letras minúsculas e removendo espaços em branco
+    var name = nameField.value.trim().toLowerCase();
 
-    // Dividindo o nome em partes usando o espaço em branco para separar
+    // Divide o nome em partes usando espaço como delimitador
     var names = name.split(' ');
 
-    // Verificando se há mais de um nome
+    // Captura o último nome, se houver mais de um
     if (names.length > 1) {
-      // Capturando o último nome
-      var lastname = names[names.length - 1];
+      var lastName = names[names.length - 1]
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+        .replace(/[^a-zA-Z]/g, ""); // Mantém apenas letras
 
-      // Removendo acentos e caracteres especiais do último nome
-      lastname = lastname.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
-
-      // Define o valor em um cookie com validade de 30 dias a partir da data atual
+      // Define a expiração do cookie para 30 dias a partir de agora
       var expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-      document.cookie = "LeadLastName=" + encodeURIComponent(lastname) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      expirationDate.setDate(expirationDate.getDate() + 30);
 
-      return lastname;
-    } else {
-      // Se houver apenas um nome, retorne uma string vazia
-      return '';
+      // Obtém o domínio principal para cobrir subdomínios
+      var domainParts = location.hostname.split('.');
+      var domain = domainParts.length > 2 
+          ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+          : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+      // Define o cookie para todo o domínio e subdomínios
+      document.cookie = "LeadLastName=" + encodeURIComponent(lastName) + 
+                        "; expires=" + expirationDate.toUTCString() + 
+                        "; path=/; domain=" + domain + 
+                        "; Secure; SameSite=None;";
+
+      return lastName;
     }
-  } else {
-    return undefined;
   }
+  
+  return ''; // Retorna string vazia caso não haja sobrenome
 }
