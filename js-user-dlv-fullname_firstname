@@ -1,20 +1,26 @@
 function getName() {
-  var nameField = {{dlv-fullname}}; // Substitua pela variável da camada de dados
-  var name = nameField.value;
+  var firstname = {{dlv-fullname}}; // Substitua pela variável da camada de dados
 
-  // Dividindo o nome em partes usando o espaço em branco para separar
-  var names = name.split(' ');
+  // Verifica se firstname está definido, é uma string válida e não está vazia
+  if (firstname && typeof firstname === "string" && firstname.trim() !== "") {
+    var name = firstname.trim();
 
-  // Verificando se há mais de um nome e removendo o último nome
-  if (names.length > 1) {
-    names.pop();
+    // Divide o nome completo em partes
+    var names = name.split(/\s+/); // Divide removendo espaços extras
+
+    // Remove o último nome se houver mais de um
+    if (names.length > 1) {
+      names.pop();
+    }
+
+    // Junta os nomes restantes em uma única string
+    var result = names.join(' ')
+      .toLowerCase() // Converte para minúsculas
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^a-zA-Z\s]/g, ""); // Remove caracteres especiais, mantendo espaços
+
+    return result;
   }
 
-  // Juntando os nomes novamente em uma única string
-  var result = names.join(' ');
-
-  // Formatando o resultado em letras minúsculas e removendo acentos e caracteres especiais
-  result = result.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z\s]/g, "");
-
-  return result;
+  return null; // Retorna null se a variável estiver vazia ou indefinida
 }
