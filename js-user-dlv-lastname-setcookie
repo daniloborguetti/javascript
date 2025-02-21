@@ -1,22 +1,32 @@
 function formatLastName() {
   // Substitua pela variável da sua Camada de Dados
-  var LastName = {{dlv-lastname}};
-  
-  // Verifique se a variável está definida e não é nula
-  if (LastName) {
-    // Converta para letras minúsculas
-    var formattedLastName = LastName.toLowerCase();
+  var lastname = {{dlv-lastname}};
 
-    // Remova acentos e caracteres especiais
-    formattedLastName = formattedLastName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+  // Verifica se a variável está definida e é uma string válida
+  if (lastname && typeof lastname === "string" && lastname.trim() !== "") {
+    // Converte para letras minúsculas e remove espaços extras
+    var formattedLastName = lastname.trim().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^a-zA-Z]/g, ""); // Mantém apenas letras
 
-    // Armazene o valor em um cookie com duração de 30 dias
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadLastName=" + formattedLastName + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadLastName=" + encodeURIComponent(formattedLastName) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return formattedLastName;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia
   }
+
+  return null; // Retorna null se a variável estiver vazia ou indefinida
 }
