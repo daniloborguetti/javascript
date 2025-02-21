@@ -1,18 +1,29 @@
 function formatVariableCookie() {
-  // Substitua pela variável do seu formulário
+  // Seleciona o campo de input pelo ID
   var variableInput = document.querySelector('[id="variavel"]'); 
 
-  // Verifica se variableInput não é nulo ou indefinido e se contém um valor não vazio
+  // Verifica se o campo existe e contém um valor
   if (variableInput && variableInput.value.trim() !== '') {
     var value = variableInput.value.trim(); // Remove espaços em branco no início e no fim
 
-    // Define o valor em um cookie com validade de 30 dias a partir da data atual
+    // Define a expiração do cookie para 30 dias a partir de agora
     var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30); // 30 dias a partir de agora
-    document.cookie = "LeadVariavel=" + encodeURIComponent(value) + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadVariavel=" + encodeURIComponent(value) + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return value;
-  } else {
-    return undefined; 
   }
+
+  return undefined; 
 }
