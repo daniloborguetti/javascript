@@ -1,46 +1,37 @@
 function formatState() {
   var estados = {
-    'Acre': 'ac',
-    'Alagoas': 'al',
-    'Amapá': 'ap',
-    'Amazonas': 'am',
-    'Bahia': 'ba',
-    'Ceará': 'ce',
-    'Distrito Federal': 'df',
-    'Espírito Santo': 'es',
-    'Goiás': 'go',
-    'Maranhão': 'ma',
-    'Mato Grosso': 'mt',
-    'Mato Grosso do Sul': 'ms',
-    'Minas Gerais': 'mg',
-    'Pará': 'pa',
-    'Paraíba': 'pb',
-    'Paraná': 'pr',
-    'Pernambuco': 'pe',
-    'Piauí': 'pi',
-    'Rio de Janeiro': 'rj',
-    'Rio Grande do Norte': 'rn',
-    'Rio Grande do Sul': 'rs',
-    'Rondônia': 'ro',
-    'Roraima': 'rr',
-    'Santa Catarina': 'sc',
-    'São Paulo': 'sp',
-    'Sergipe': 'se',
-    'Tocantins': 'to'
+    'Acre': 'ac', 'Alagoas': 'al', 'Amapá': 'ap', 'Amazonas': 'am',
+    'Bahia': 'ba', 'Ceará': 'ce', 'Distrito Federal': 'df', 'Espírito Santo': 'es',
+    'Goiás': 'go', 'Maranhão': 'ma', 'Mato Grosso': 'mt', 'Mato Grosso do Sul': 'ms',
+    'Minas Gerais': 'mg', 'Pará': 'pa', 'Paraíba': 'pb', 'Paraná': 'pr',
+    'Pernambuco': 'pe', 'Piauí': 'pi', 'Rio de Janeiro': 'rj', 'Rio Grande do Norte': 'rn',
+    'Rio Grande do Sul': 'rs', 'Rondônia': 'ro', 'Roraima': 'rr', 'Santa Catarina': 'sc',
+    'São Paulo': 'sp', 'Sergipe': 'se', 'Tocantins': 'to'
   };
 
   // Substitua pela variável real da sua Camada de Dados ou método de obtenção do estado
-  var State = "{{dlv-state}}"; 
+  var state = "{{dlv-state}}"; 
 
-  // Converter State para minúsculas para correspondência insensível a maiúsculas
-  var stateKey = State.toLowerCase();
+  // Converter state para minúsculas para correspondência insensível a maiúsculas
+  var stateKey = state.toLowerCase();
 
   if (stateKey in estados) {
     var formattedState = estados[stateKey];
 
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadState=" + formattedState + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    // Obtém o domínio principal para cobrir subdomínios
+    var domainParts = location.hostname.split('.');
+    var domain = domainParts.length > 2 
+        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
+        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+
+    // Define o cookie para todo o domínio e subdomínios
+    document.cookie = "LeadState=" + formattedState + 
+                      "; expires=" + expirationDate.toUTCString() + 
+                      "; path=/; domain=" + domain + 
+                      "; Secure; SameSite=None;";
 
     return formattedState;
   } else {
