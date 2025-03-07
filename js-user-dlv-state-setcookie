@@ -1,30 +1,22 @@
 function formatState() {
-  // Substitua pela variável real da sua Camada de Dados ou método de obtenção do estado
-  var state = "{{dlv-state}}"; 
+  // Substitua pela variável real da sua Camada de Dados
+  var State = {{user-geo-dlv-state}}; 
 
-  // Verifica se a variável state está definida e não é nula
-  if (state) {
-    // Converter state para minúsculas para consistência
-    var formattedState = state.toLowerCase();
-
-    // Define a expiração do cookie para 30 dias a partir de agora
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-
-    // Obtém o domínio principal para cobrir subdomínios
-    var domainParts = location.hostname.split('.');
-    var domain = domainParts.length > 2 
-        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
-
-    // Define o cookie para todo o domínio e subdomínios
-    document.cookie = "LeadState=" + encodeURIComponent(formattedState) + 
-                      "; expires=" + expirationDate.toUTCString() + 
-                      "; path=/; domain=" + domain + 
-                      "; Secure; SameSite=None;";
-
-    return formattedState;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia
+  // Verifica se a variável é válida
+  if (typeof State !== 'string' || !State.trim()) {
+    return; // Não retorna nada se a variável for vazia ou inválida
   }
+
+  // Converter State para minúsculas para consistência
+  var formattedState = State.trim().toLowerCase();
+
+  // Define a data de expiração para 30 dias a partir da data atual
+  var expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 30);
+  var expires = "expires=" + expirationDate.toUTCString();
+
+  // Define o cookie com SameSite=Lax para evitar bloqueios modernos
+  document.cookie = "LeadState=" + encodeURIComponent(formattedState) + "; " + expires + "; path=/; SameSite=Lax";
+
+  return formattedState;
 }
