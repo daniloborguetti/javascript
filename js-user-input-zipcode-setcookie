@@ -1,15 +1,15 @@
 function formatZipCodeSetCookie() {
   // Substitua pela variável do seu formulário
-  var zipcodeInput = document.querySelector('[id="zipcode"]');
+  var zipcodeInput = document.querySelector('[id="shippingAddress.zipcode"]');
 
   // Verifica se zipcodeInput não é nulo ou indefinido e se contém um valor não vazio
   if (zipcodeInput && zipcodeInput.value.trim() !== '') {
     var zipcodeValue = zipcodeInput.value.trim();
 
-    // Remove caracteres não numéricos e captura os primeiros 5 a 8 dígitos (para suportar CEPs no formato XXXXX-XXX)
-    var zipcodeFormatted = zipcodeValue.replace(/\D/g, '').slice(0, 8);
+    // Remove caracteres não numéricos e captura apenas os primeiros 5 dígitos
+    var zipcodeFormatted = zipcodeValue.replace(/\D/g, '').slice(0, 5);
 
-    if (zipcodeFormatted.length >= 5) {
+    if (zipcodeFormatted.length === 5) {
       // Define a expiração do cookie para 30 dias a partir de agora
       var expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
@@ -28,7 +28,7 @@ function formatZipCodeSetCookie() {
 
       return zipcodeFormatted;
     } else {
-      // Retorna uma string vazia se não encontrar um CEP válido
+      // Retorna uma string vazia se não encontrar um CEP válido com pelo menos 5 dígitos
       return "";
     }
   }
