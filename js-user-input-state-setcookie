@@ -20,7 +20,9 @@ function formatStateCookie() {
       .toLowerCase(); // Convertendo para letras minúsculas
 
     // Verifica se o estado existe no mapeamento
-    var stateCode = Object.keys(stateMap).find(key => key.toLowerCase() === stateSelect);
+    var stateCode = Object.keys(stateMap).find(function(key) {
+      return key.toLowerCase() === stateSelect;
+    });
 
     if (stateCode) {
       var expirationDate = new Date();
