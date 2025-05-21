@@ -3,7 +3,7 @@ function formatBirthdateSetCookie() {
 
   // Verifica se o campo de data de nascimento existe e contém um valor válido
   if (!birthdate || birthdate.value.trim() === '') {
-    return 'Data inválida'; // Retorna mensagem de erro se o campo está vazio ou não existe
+    return 'Data inválida';
   }
 
   var birthdateValue = birthdate.value.trim();
@@ -14,32 +14,25 @@ function formatBirthdateSetCookie() {
     return 'Data inválida';
   }
 
-  var dia = partes[0].padStart(2, '0'); // Garante que o dia tenha dois dígitos
-  var mes = partes[1].padStart(2, '0'); // Garante que o mês tenha dois dígitos
+  var dia = partes[0].padStart(2, '0');
+  var mes = partes[1].padStart(2, '0');
   var ano = partes[2];
 
-  // Valida se os números da data são válidos
+  // Valida os valores numéricos da data
   if (isNaN(dia) || isNaN(mes) || isNaN(ano) || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
     return 'Data inválida';
   }
 
-  var dataFormatada = ano + mes + dia; // Formata a data no estilo AAAAMMDD
+  var dataFormatada = ano + mes + dia; // AAAAMMDD
 
   // Define a expiração do cookie para 30 dias a partir de agora
   var expires = new Date();
-  expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000); // Adiciona 30 dias à data atual
+  expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  // Obtém o domínio principal para cobrir subdomínios
-  var domainParts = location.hostname.split('.');
-  var domain = domainParts.length > 2 
-      ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-      : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
-
-  // Define o cookie para todo o domínio e subdomínios
+  // Define o cookie como primário, válido para todo o site
   document.cookie = "LeadBirthdate=" + encodeURIComponent(dataFormatada) + 
                     "; expires=" + expires.toUTCString() + 
-                    "; path=/; domain=" + domain + 
-                    "; Secure; SameSite=None;";
+                    "; path=/";
 
   return dataFormatada;
 }
