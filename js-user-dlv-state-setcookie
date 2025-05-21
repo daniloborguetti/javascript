@@ -13,10 +13,11 @@ function formatState() {
   // Define a data de expiração para 30 dias a partir da data atual
   var expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
-  var expires = "expires=" + expirationDate.toUTCString();
 
-  // Define o cookie com SameSite=Lax para evitar bloqueios modernos
-  document.cookie = "LeadState=" + encodeURIComponent(formattedState) + "; " + expires + "; path=/; SameSite=Lax";
+  // Define o cookie como primário, sem SameSite nem Secure
+  document.cookie = "LeadState=" + encodeURIComponent(formattedState) + 
+                    "; expires=" + expirationDate.toUTCString() + 
+                    "; path=/";
 
   return formattedState;
 }
