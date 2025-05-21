@@ -8,23 +8,19 @@ function formatFirstName() {
     var formattedFirstName = firstname.toLowerCase();
 
     // Remova acentos e caracteres especiais
-    formattedFirstName = formattedFirstName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z]/g, "");
+    formattedFirstName = formattedFirstName
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z]/g, "");
 
     // Armazene o valor em um cookie com duração de 30 dias
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
 
-    // Obtém o domínio principal para cobrir subdomínios
-    var domainParts = location.hostname.split('.');
-    var domain = domainParts.length > 2 
-        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
-
-    // Define o cookie para todo o domínio e subdomínios
+    // Define o cookie como primário, válido para todo o site
     document.cookie = "LeadFirstName=" + encodeURIComponent(formattedFirstName) + 
                       "; expires=" + expirationDate.toUTCString() + 
-                      "; path=/; domain=" + domain + 
-                      "; Secure; SameSite=None;";
+                      "; path=/";
 
     return formattedFirstName;
   } else {
