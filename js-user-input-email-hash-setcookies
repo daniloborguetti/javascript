@@ -21,17 +21,10 @@ function formatEmailHashSetCookie() {
   var expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30); // Define a validade do cookie para 30 dias
 
-  // Obtém o domínio principal para cobrir subdomínios
-  var domainParts = location.hostname.split('.');
-  var domain = domainParts.length > 2 
-      ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-      : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
-
-  // Definindo o cookie para todo o domínio e subdomínios
+  // Define o cookie como primário, válido para todo o site
   document.cookie = "LeadEmailHash=" + encodeURIComponent(hashedEmail) + 
                     "; expires=" + expirationDate.toUTCString() + 
-                    "; path=/; domain=" + domain + 
-                    "; Secure; SameSite=None;";
+                    "; path=/";
 
   return hashedEmail;
 }
