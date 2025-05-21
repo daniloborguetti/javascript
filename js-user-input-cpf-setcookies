@@ -1,6 +1,6 @@
 function formatVariableCookie() {
   // Substitua pela variável do seu formulário
-  var cpf = document.querySelector('[id="variavel"]'); 
+  var cpf = document.querySelector('[id="cpf"]'); 
 
   // Verifica se cpf não é nulo, indefinido e se contém um valor não vazio
   if (cpf && cpf.value.trim() !== '') {
@@ -10,17 +10,10 @@ function formatVariableCookie() {
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
 
-    // Obtém o domínio principal para cobrir subdomínios
-    var domainParts = location.hostname.split('.');
-    var domain = domainParts.length > 2 
-        ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-        : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
-
-    // Define o cookie para todo o domínio e subdomínios
+    // Define o cookie como primário, válido para todo o site
     document.cookie = "LeadCPF=" + encodeURIComponent(value) + 
                       "; expires=" + expirationDate.toUTCString() + 
-                      "; path=/; domain=" + domain + 
-                      "; Secure; SameSite=None;";
+                      "; path=/";
 
     return value;
   } else {
