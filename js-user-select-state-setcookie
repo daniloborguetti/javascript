@@ -1,42 +1,35 @@
 function formatStateSetCookie() {
-    var e = document.getElementById("state_id"); // Substitua pela variável do seu formulário
+  var e = document.getElementById("state_id"); // Substitua pela variável do seu formulário
 
-    // Verifica se o elemento stateInput não é nulo ou indefinido e se contém um valor válido
-    if (e && e.options[e.selectedIndex]) {
-        var stateValue = e.options[e.selectedIndex].text.trim(); // Obtém o nome do estado da opção selecionada
+  // Verifica se o elemento stateInput não é nulo ou indefinido e se contém um valor válido
+  if (e && e.options[e.selectedIndex]) {
+    var stateValue = e.options[e.selectedIndex].text.trim(); // Obtém o nome do estado da opção selecionada
 
-        // Mapeamento de nomes de estados para siglas
-        var stateMap = {
-            'Acre': 'ac', 'Alagoas': 'al', 'Amapá': 'ap', 'Amazonas': 'am',
-            'Bahia': 'ba', 'Ceará': 'ce', 'Distrito Federal': 'df', 'Espírito Santo': 'es',
-            'Goiás': 'go', 'Maranhão': 'ma', 'Mato Grosso': 'mt', 'Mato Grosso do Sul': 'ms',
-            'Minas Gerais': 'mg', 'Pará': 'pa', 'Paraíba': 'pb', 'Paraná': 'pr',
-            'Pernambuco': 'pe', 'Piauí': 'pi', 'Rio de Janeiro': 'rj', 'Rio Grande do Norte': 'rn',
-            'Rio Grande do Sul': 'rs', 'Rondônia': 'ro', 'Roraima': 'rr', 'Santa Catarina': 'sc',
-            'São Paulo': 'sp', 'Sergipe': 'se', 'Tocantins': 'to'
-        };
+    // Mapeamento de nomes de estados para siglas
+    var stateMap = {
+      'Acre': 'ac', 'Alagoas': 'al', 'Amapá': 'ap', 'Amazonas': 'am',
+      'Bahia': 'ba', 'Ceará': 'ce', 'Distrito Federal': 'df', 'Espírito Santo': 'es',
+      'Goiás': 'go', 'Maranhão': 'ma', 'Mato Grosso': 'mt', 'Mato Grosso do Sul': 'ms',
+      'Minas Gerais': 'mg', 'Pará': 'pa', 'Paraíba': 'pb', 'Paraná': 'pr',
+      'Pernambuco': 'pe', 'Piauí': 'pi', 'Rio de Janeiro': 'rj', 'Rio Grande do Norte': 'rn',
+      'Rio Grande do Sul': 'rs', 'Rondônia': 'ro', 'Roraima': 'rr', 'Santa Catarina': 'sc',
+      'São Paulo': 'sp', 'Sergipe': 'se', 'Tocantins': 'to'
+    };
 
-        // Converte o nome do estado para a sigla
-        var stateAbbreviation = stateMap[stateValue] || 'desconhecido'; // Retorna 'desconhecido' se não encontrar
+    // Converte o nome do estado para a sigla
+    var stateAbbreviation = stateMap[stateValue] || 'desconhecido'; // Retorna 'desconhecido' se não encontrar
 
-        // Define a expiração do cookie para 30 dias a partir de agora
-        var dataExpiracao = new Date();
-        dataExpiracao.setDate(dataExpiracao.getDate() + 30);
+    // Define a expiração do cookie para 30 dias a partir de agora
+    var dataExpiracao = new Date();
+    dataExpiracao.setDate(dataExpiracao.getDate() + 30);
 
-        // Obtém o domínio principal para cobrir subdomínios
-        var domainParts = location.hostname.split('.');
-        var domain = domainParts.length > 2 
-            ? "." + domainParts.slice(-2).join('.')  // Usa os dois últimos segmentos
-            : "." + location.hostname.replace(/^www\./i, ""); // Remove 'www.' para cobrir subdomínios
+    // Define o cookie como primário, válido para todo o site
+    document.cookie = "LeadState=" + encodeURIComponent(stateAbbreviation) + 
+                      "; expires=" + dataExpiracao.toUTCString() + 
+                      "; path=/";
 
-        // Define o cookie para todo o domínio e subdomínios
-        document.cookie = "LeadState=" + encodeURIComponent(stateAbbreviation) + 
-                          "; expires=" + dataExpiracao.toUTCString() + 
-                          "; path=/; domain=" + domain + 
-                          "; Secure; SameSite=None;";
-
-        return stateAbbreviation;
-    } else {
-        return undefined;
-    }
+    return stateAbbreviation;
+  } else {
+    return undefined;
+  }
 }
