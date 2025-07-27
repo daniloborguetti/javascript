@@ -1,33 +1,64 @@
 function formatState() {
-  var estados = {
-    'Acre': 'ac', 'Alagoas': 'al', 'Amapá': 'ap', 'Amazonas': 'am',
-    'Bahia': 'ba', 'Ceará': 'ce', 'Distrito Federal': 'df', 'Espírito Santo': 'es',
-    'Goiás': 'go', 'Maranhão': 'ma', 'Mato Grosso': 'mt', 'Mato Grosso do Sul': 'ms',
-    'Minas Gerais': 'mg', 'Pará': 'pa', 'Paraíba': 'pb', 'Paraná': 'pr',
-    'Pernambuco': 'pe', 'Piauí': 'pi', 'Rio de Janeiro': 'rj', 'Rio Grande do Norte': 'rn',
-    'Rio Grande do Sul': 'rs', 'Rondônia': 'ro', 'Roraima': 'rr', 'Santa Catarina': 'sc',
-    'São Paulo': 'sp', 'Sergipe': 'se', 'Tocantins': 'to'
+  var stateMap = {
+    "State of Acre": "ac",
+    "State of Alagoas": "al",
+    "State of Amapá": "ap",
+    "State of Amazonas": "am",
+    "State of Bahia": "ba",
+    "State of Ceará": "ce",
+    "State of Distrito Federal": "df",
+    "State of Espírito Santo": "es",
+    "State of Goiás": "go",
+    "State of Maranhão": "ma",
+    "State of Mato Grosso": "mt",
+    "State of Mato Grosso do Sul": "ms",
+    "State of Minas Gerais": "mg",
+    "State of Pará": "pa",
+    "State of Paraíba": "pb",
+    "State of Paraná": "pr",
+    "State of Pernambuco": "pe",
+    "State of Piauí": "pi",
+    "State of Rio de Janeiro": "rj",
+    "State of Rio Grande do Norte": "rn",
+    "State of Rio Grande do Sul": "rs",
+    "State of Rondônia": "ro",
+    "State of Roraima": "rr",
+    "State of Santa Catarina": "sc",
+    "State of São Paulo": "sp",
+    "State of Sergipe": "se",
+    "State of Tocantins": "to"
   };
 
-  // Substitua pela variável real da sua Camada de Dados ou método de obtenção do estado
-  var state = "{{dlv-state}}";
+  // Substitua pela variável real da sua Camada de Dados
+  var State = {{user-geo-dlv-state}};
 
-  // Converter state para minúsculas para correspondência insensível a maiúsculas
-  var stateKey = state.toLowerCase();
+  if (typeof State !== 'string' || !State.trim()) {
+    return; // Não retorna nada se inválido
+  }
 
-  if (stateKey in estados) {
-    var formattedState = estados[stateKey];
+  // Normaliza para remover acentos e padroniza
+  var normalizedState = State.trim()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos
+    .replace(/\s+/g, ' ') // remove espaços duplicados
+    .toLowerCase();
+
+  // Tenta encontrar a chave correspondente no mapa
+  var matchedKey = Object.keys(stateMap).find(function(key) {
+    return key.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === normalizedState;
+  });
+
+  if (matchedKey) {
+    var code = stateMap[matchedKey];
 
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
 
-    // Define o cookie como primário, válido para todo o site
-    document.cookie = "LeadState=" + formattedState + 
-                      "; expires=" + expirationDate.toUTCString() + 
+    document.cookie = "LeadState=" + encodeURIComponent(code) +
+                      "; expires=" + expirationDate.toUTCString() +
                       "; path=/";
 
-    return formattedState;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia ou o estado não for encontrado
+    return code;
   }
+
+  return; // Estado não encontrado
 }
