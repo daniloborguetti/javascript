@@ -1,6 +1,6 @@
 function formatLastNameSetCookie() {
   // Substitua pela variável da sua Camada de Dados
-  var lastname = {{dlv-fullname}}; 
+  var lastname = {{user-dlv-fullname}}; 
 
   // Verifica se lastname está definido, é uma string válida e não está vazia
   if (lastname && typeof lastname === "string" && lastname.trim() !== "") {
