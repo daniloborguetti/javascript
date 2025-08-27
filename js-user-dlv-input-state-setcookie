@@ -1,0 +1,21 @@
+function () {
+  var dlvState = {{user-dlv-state}};
+  var inputElement = document.querySelector('[id="state"]');
+  var inputState = inputElement ? inputElement.value : undefined;
+
+  var state = dlvState || inputState;
+
+  if (state && typeof state === "string" && state.trim() !== "") {
+    var formattedState = state.trim().toLowerCase();
+
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadState=" + encodeURIComponent(formattedState) +
+                      "; expires=" + expirationDate.toUTCString() +
+                      "; path=/";
+
+    return formattedState;
+  }
+
+  return null;
+}
