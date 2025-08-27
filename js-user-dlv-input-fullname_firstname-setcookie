@@ -1,0 +1,28 @@
+function () {
+  var dlvFullName = {{user-dlv-fullname}};
+  var inputElement = document.querySelector('[id="fullname"]');
+  var inputFullName = inputElement ? inputElement.value : undefined;
+
+  var fullname = dlvFullName || inputFullName;
+
+  if (fullname && typeof fullname === "string" && fullname.trim() !== "") {
+    var names = fullname.trim().toLowerCase().split(" ");
+
+    var formattedFirstName = names[0]
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^a-zA-Z]/g, "");      // Mantém apenas letras
+
+    if (formattedFirstName) {
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = "LeadFirstName=" + encodeURIComponent(formattedFirstName) +
+                        "; expires=" + expirationDate.toUTCString() +
+                        "; path=/";
+
+      return formattedFirstName;
+    }
+  }
+
+  return null;
+}
