@@ -1,0 +1,25 @@
+function () {
+  var dlvPhone = {{dlv-phone}};
+  var inputElement = document.querySelector('[id="phone"]');
+  var inputPhone = inputElement ? inputElement.value : undefined;
+
+  var phonenumber = dlvPhone || inputPhone;
+
+  if (phonenumber && typeof phonenumber === "string" && phonenumber.trim() !== "") {
+    var numeroLimpo = phonenumber.replace(/\D/g, "");
+
+    if (!numeroLimpo.startsWith("55")) {
+      numeroLimpo = "55" + numeroLimpo;
+    }
+
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadPhone=" + encodeURIComponent(numeroLimpo) +
+                      "; expires=" + expirationDate.toUTCString() +
+                      "; path=/";
+
+    return numeroLimpo;
+  }
+
+  return null;
+}
