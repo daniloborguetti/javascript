@@ -1,0 +1,23 @@
+function () {
+  var dlvLastName = {{dlv-lastname}};
+  var inputElement = document.querySelector('[id="lastname"]');
+  var inputLastName = inputElement ? inputElement.value : undefined;
+
+  var lastname = dlvLastName || inputLastName;
+
+  if (lastname) {
+    var formatted = lastname.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z]/g, "");
+
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadLastName=" + encodeURIComponent(formatted) +
+                      "; expires=" + expirationDate.toUTCString() +
+                      "; path=/";
+
+    return formatted;
+  }
+  return null;
+}
