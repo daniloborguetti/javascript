@@ -1,0 +1,27 @@
+function () {
+  var dlvCity = {{user-dlv-city}};
+  var inputElement = document.querySelector('[id="city"]');
+  var inputCity = inputElement ? inputElement.value : undefined;
+
+  var city = dlvCity || inputCity;
+
+  if (city && typeof city === "string" && city.trim() !== "") {
+    var parsedCity = city.trim()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[^0-9a-zA-Z]/g, "")    // Remove caracteres especiais
+      .toLowerCase();
+
+    if (parsedCity) {
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = "LeadCity=" + encodeURIComponent(parsedCity) +
+                        "; expires=" + expirationDate.toUTCString() +
+                        "; path=/";
+
+      return parsedCity;
+    }
+  }
+
+  return null;
+}
