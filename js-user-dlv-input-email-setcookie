@@ -1,5 +1,5 @@
 function () {
-  var dlvEmail = {{dlv-email}};
+  var dlvEmail = {{user-dlv-email}};
   var inputElement = document.querySelector('[id="email"]');
   var inputEmail = inputElement ? inputElement.value : undefined;
 
