@@ -1,5 +1,5 @@
 function getLastname() {
-  var lastname = {{dlv-fullname}}; // Substitua pela variável da camada de dados
+  var lastname = {{user-dlv-fullname}}; // Substitua pela variável da camada de dados
 
   // Verifica se lastname está definido, é uma string válida e não está vazia
   if (lastname && typeof lastname === "string" && lastname.trim() !== "") {
