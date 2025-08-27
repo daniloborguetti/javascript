@@ -1,0 +1,30 @@
+function () {
+  var dlvFullName = {{user-dlv-fullname}};
+  var inputElement = document.querySelector('[id="fullname"]');
+  var inputFullName = inputElement ? inputElement.value : undefined;
+
+  var fullname = dlvFullName || inputFullName;
+
+  if (fullname && typeof fullname === "string" && fullname.trim() !== "") {
+    var names = fullname.trim().toLowerCase().split(/\s+/);
+
+    if (names.length > 1) {
+      var formattedLastName = names[names.length - 1]
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+        .replace(/[^a-zA-Z]/g, "");      // Mantém apenas letras
+
+      if (formattedLastName) {
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 30);
+        document.cookie = "LeadLastName=" + encodeURIComponent(formattedLastName) +
+                          "; expires=" + expirationDate.toUTCString() +
+                          "; path=/";
+
+        return formattedLastName;
+      }
+    }
+  }
+
+  return "";
+}
