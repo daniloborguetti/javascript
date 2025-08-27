@@ -1,5 +1,5 @@
 function () {
-  var dlvPhone = {{dlv-phone}};
+  var dlvPhone = {{user-dlv-phone}};
   var inputElement = document.querySelector('[id="phone"]');
   var inputPhone = inputElement ? inputElement.value : undefined;
 
