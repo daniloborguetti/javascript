@@ -1,5 +1,5 @@
 function () {
-  var dlvFirstName = {{dlv-firstname}};
+  var dlvFirstName = {{user-dlv-firstname}};
   var inputElement = document.querySelector('[id="firstname"]');
   var inputFirstName = inputElement ? inputElement.value : undefined;
 
