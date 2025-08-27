@@ -1,6 +1,6 @@
 function formatUserId() {
   // Substitua pela variável da sua Camada de Dados
-  var userid = {{dlv-userid}};
+  var userid = {{user-dlv-userid}};
   
   // Verifique se a variável está definida e não é nula
   if (userid) {
