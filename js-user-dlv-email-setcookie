@@ -1,6 +1,6 @@
 function formatEmail() {
   // Substitua pela variável da sua Camada de Dados
-  var Email = {{dlv-email}};
+  var Email = {{user-dlv-email}};
 
   // Verifique se a variável está definida e é uma string válida
   if (Email && typeof Email === "string" && Email.trim() !== "") {
