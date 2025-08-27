@@ -1,0 +1,21 @@
+function () {
+  var dlvEmail = {{dlv-email}};
+  var inputElement = document.querySelector('[id="email"]');
+  var inputEmail = inputElement ? inputElement.value : undefined;
+
+  var email = dlvEmail || inputEmail;
+
+  if (email && typeof email === "string" && email.trim() !== "") {
+    var formattedEmail = email.trim().toLowerCase();
+
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = "LeadEmail=" + encodeURIComponent(formattedEmail) +
+                      "; expires=" + expirationDate.toUTCString() +
+                      "; path=/";
+
+    return formattedEmail;
+  }
+
+  return null;
+}
