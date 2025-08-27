@@ -1,0 +1,24 @@
+function () {
+  var dlvZipCode = {{user-dlv-zipcode}};
+  var inputElement = document.querySelector('[id="zipcode"]');
+  var inputZipCode = inputElement ? inputElement.value : undefined;
+
+  var zipcode = dlvZipCode || inputZipCode;
+
+  if (zipcode && typeof zipcode === "string" && zipcode.trim() !== "") {
+    var cleanedZipcode = zipcode.replace(/\D/g, "");
+    var firstFiveDigits = cleanedZipcode.substring(0, 5);
+
+    if (firstFiveDigits) {
+      var expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = "LeadZipCode=" + encodeURIComponent(firstFiveDigits) +
+                        "; expires=" + expirationDate.toUTCString() +
+                        "; path=/";
+
+      return firstFiveDigits;
+    }
+  }
+
+  return null;
+}
