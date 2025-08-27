@@ -1,5 +1,5 @@
 function formatarDataNascimento() {
-  var birthdate = {{dlv-birthdate}}; // Substitua pela variável da sua Camada de Dados
+  var birthdate = {{user-dlv-birthdate}}; // Substitua pela variável da sua Camada de Dados
 
   var partes = birthdate.split('/'); // Substitua pelo caracterer que separa a data
   if (partes.length !== 3) {
