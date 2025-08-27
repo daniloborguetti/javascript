@@ -1,5 +1,5 @@
 function () {
-  var email = {{dlv-email}}; // Substitua pela variável da sua Camada de Dados
+  var email = {{user-dlv-email}}; // Substitua pela variável da sua Camada de Dados
   var valid = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
   
   return valid.test(email)
