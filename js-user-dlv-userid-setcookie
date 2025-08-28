@@ -1,22 +1,23 @@
-function formatUserId() {
-  // Substitua pela variável da sua Camada de Dados
-  var userid = {{user-dlv-userid}};
-  
-  // Verifique se a variável está definida e não é nula
-  if (userid) {
-    var formattedUserId = userid;
+function () {
+  var dlvUserId = {{user-dlv-userid}};
+  var el = document.querySelector('[id="userid"]');
+  var inputUserId = el ? el.value : undefined;
 
-    // Define a expiração do cookie para 30 dias a partir de agora
+  // Prioriza Data Layer; se vazio/indefinido, usa o input
+  var userid = (dlvUserId !== null && dlvUserId !== undefined && dlvUserId !== '')
+    ? dlvUserId
+    : inputUserId;
+
+  if (userid !== null && userid !== undefined && String(userid).trim() !== '') {
+    var formattedUserId = String(userid).trim();
+
     var expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 30);
-
-    // Define o cookie como primário, válido para todo o site
-    document.cookie = "LeadUserId=" + encodeURIComponent(formattedUserId) + 
-                      "; expires=" + expirationDate.toUTCString() + 
+    document.cookie = "LeadUserId=" + encodeURIComponent(formattedUserId) +
+                      "; expires=" + expirationDate.toUTCString() +
                       "; path=/";
 
     return formattedUserId;
-  } else {
-    return null; // Retorna nulo se a variável estiver vazia
   }
+  return null;
 }
