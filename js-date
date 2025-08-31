@@ -1,13 +1,5 @@
 function() {
   var agora = new Date();
-
-  // Formato: DD/MM/YYYY HH:mm:ss
-  var dia = ('0' + agora.getDate()).slice(-2);
-  var mes = ('0' + (agora.getMonth() + 1)).slice(-2);
-  var ano = agora.getFullYear();
-  var hora = ('0' + agora.getHours()).slice(-2);
-  var minuto = ('0' + agora.getMinutes()).slice(-2);
-  var segundo = ('0' + agora.getSeconds()).slice(-2);
-
-  return dia + '/' + mes + '/' + ano + ' ' + hora + ':' + minuto + ':' + segundo;
+  return agora.toISOString(); 
+  // Exemplo: 2025-08-31T17:30:00.000Z
 }
