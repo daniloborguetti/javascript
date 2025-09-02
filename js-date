@@ -1,5 +1,4 @@
-function() {
+function () {
   var agora = new Date();
-  return agora.toISOString(); 
-  // Exemplo: 2025-08-31T17:30:00.000Z
+  return agora.toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo' }).replace(' ', 'T');
 }
