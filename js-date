@@ -1,4 +1,8 @@
 function () {
   var agora = new Date();
-  return agora.toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo' }).replace(' ', 'T');
+  var offset = -3; // Fixo: horário padrão de São Paulo sem horário de verão
+  var localISO = new Date(agora.getTime() + offset * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, -1); // remove o "Z"
+  return localISO + "-03:00";
 }
