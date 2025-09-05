@@ -97,7 +97,7 @@ function onEdit(e) {
       utm_term: dataRow[colUTMTerm - 1]
     },
     ads_parameter: {
-      fbc: dataRow[colFbclid - 1],
+      fbc: dataRow[colFbc - 1],
       fbp: dataRow[colFbp - 1],
       source_url: dataRow[colSourceURL - 1],
       user_ip: dataRow[colUserIP - 1],
