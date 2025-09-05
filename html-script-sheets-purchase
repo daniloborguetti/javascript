@@ -1,0 +1,129 @@
+function onEdit(e) {
+  // ID fixo da planilha
+  var sheetId = 'URL DA PLANILHA DE LEADS';
+
+  // Nome da aba específica
+  var sheetName = 'Leads';
+
+  // Abre a planilha pelo ID
+  var ss = SpreadsheetApp.openById(sheetId);
+
+  // Seleciona a aba específica
+  var sheet = ss.getSheetByName(sheetName);
+
+  // Pega a linha e a coluna editadas
+  var range = e.range;
+  var row = range.getRow();
+
+  // Colunas
+  var colData            = 1;   
+  var colEvent           = 2;   
+  var colUserIndex       = 3;   
+  var colFirstname       = 4;   
+  var colLastname        = 5;   
+  var colEmail           = 6;   
+  var colPhone           = 7;   
+  var colCity            = 8;   
+  var colState           = 9;   
+  var colCountry         = 10;    
+  var colStatus          = 11;   
+  var colQualification   = 12; 
+  var colProductName     = 13;    
+  var colProductID       = 14;     
+  var colValue           = 15;    
+  var colCurrency        = 16;    
+  var colUTMSource       = 17;     
+  var colUTMMedium       = 18;    
+  var colUTMCampaign     = 19;    
+  var colUTMContent      = 20;    
+  var colUTMTerm         = 21;    
+  var colFbclid          = 22;    
+  var colFbp             = 23;   
+  var colSourceURL       = 24;   
+  var colClientIP        = 25;   
+  var colClientUserAgent = 26;   
+  var colGclid           = 27;    
+  var colWbraid          = 28;    
+  var colGbraid          = 29;    
+  var colLeadQualificado = 30;    
+  var colLeadConvertido  = 31;  
+
+  // Só processa se a coluna editada for a "Lead convertido"
+  if (range.getColumn() !== colLeadConvertido) return;
+
+  // Captura valor da célula editada
+  var leadConvertidoValue = sheet.getRange(row, colLeadConvertido).getValue();
+
+  // Verifica se está marcado como verdadeiro (aceita várias formas)
+  var isLeadConvertido = 
+    leadConvertidoValue === true || 
+    leadConvertidoValue === "VERDADEIRO" || 
+    leadConvertidoValue === "verdadeiro" || 
+    leadConvertidoValue === "TRUE" || 
+    leadConvertidoValue === "true";
+
+  if (!isLeadConvertido) return;
+
+  // Captura todos os dados da linha
+  var dataRow = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  // Estrutura do Payload
+  var payload = {
+    event: "Lead convertido",
+    date: dataRow[colData - 1],
+    user_data: {
+      user_index: dataRow[colUserIndex - 1],
+      firstname: dataRow[colFirstname - 1],
+      lastname: dataRow[colLastname - 1],
+      email: dataRow[colEmail - 1],
+      phone: dataRow[colPhone - 1],
+      city: dataRow[colCity - 1],
+      state: dataRow[colState - 1],
+      country: dataRow[colCountry - 1]
+    },
+    order: {
+      status: dataRow[colStatus - 1],
+      qualification: dataRow[colQualification - 1],
+      product_name: dataRow[colProductName - 1],
+      product_id: dataRow[colProductID - 1],
+      value: dataRow[colValue - 1],
+      currency: dataRow[colCurrency - 1]
+    },
+    tracking: {
+      utm_source: dataRow[colUTMSource - 1],
+      utm_medium: dataRow[colUTMMedium - 1],
+      utm_campaign: dataRow[colUTMCampaign - 1],
+      utm_content: dataRow[colUTMContent - 1],
+      utm_term: dataRow[colUTMTerm - 1]
+    },
+    ads_parameter: {
+      fbclid: dataRow[colFbclid - 1],
+      fbp: dataRow[colFbp - 1],
+      source_url: dataRow[colSourceURL - 1],
+      client_ip: dataRow[colClientIP - 1],
+      client_user_agent: dataRow[colClientUserAgent - 1],
+      gclid: dataRow[colGclid - 1],
+      wbraid: dataRow[colWbraid - 1],
+      gbraid: dataRow[colGbraid - 1]
+    },
+    lead: {
+      lead_qualificado: dataRow[colLeadQualificado - 1] === true || dataRow[colLeadQualificado - 1] === "VERDADEIRO" || dataRow[colLeadQualificado - 1] === "verdadeiro" || dataRow[colLeadQualificado - 1] === "TRUE" || dataRow[colLeadQualificado - 1] === "true",
+      lead_convertido: isLeadConvertido
+    }
+  };
+
+  // Envio do payload via POST para o endpoint
+  var endpointUrl = 'https://api.doroteiababy.com.br/advanced/';
+  var options = {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(payload)
+  };
+
+  try {
+    var response = UrlFetchApp.fetch(endpointUrl, options);
+    Logger.log('Resposta do endpoint: ' + response.getContentText());
+  } catch (error) {
+    Logger.log('Erro ao enviar payload: ' + error);
+  }
+}
