@@ -1,0 +1,42 @@
+function doGet(e) {
+  // Se o objeto e ou e.parameter não estiverem definidos, inicialize-os como objetos vazios
+  e = e || {};
+  e.parameter = e.parameter || {};
+
+  // Seleciona a primeira aba da planilha ativa
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+
+  // Captura o parâmetro de user_index
+  var user_index = e.parameter.user_index || '';
+
+  // Captura os parâmetros adicionais
+  var status        = e.parameter.status        || '';
+  var qualification = e.parameter.qualification || '';
+  var value         = e.parameter.value         || '';
+
+  // Captura os dados do formulário
+  var firstname = e.parameter.firstname || '';
+  var lastname  = e.parameter.lastname  || '';
+  var email     = e.parameter.email     || '';
+  var phone     = e.parameter.phone     || '';
+
+  // Captura os parâmetros UTM
+  var utm_source   = e.parameter.utm_source   || '';
+  var utm_medium   = e.parameter.utm_medium   || '';
+  var utm_campaign = e.parameter.utm_campaign || '';
+  var utm_content  = e.parameter.utm_content  || '';
+  var utm_term     = e.parameter.utm_term     || '';
+
+  // Captura FBCLID e GCLID
+  var fbclid = e.parameter.fbclid || '';
+  var gclid  = e.parameter.gclid  || '';
+
+  // Cria o array de dados na ordem especificada
+  var data = [new Date(), firstname, lastname, email, phone, status, qualification, value, utm_source, utm_medium, utm_campaign, utm_content, utm_term, fbclid, gclid, user_index];
+
+  // Adiciona uma nova linha na planilha com os dados
+  sheet.appendRow(data);
+
+  // Retorna uma resposta simples
+  return ContentService.createTextOutput("Dados recebidos com sucesso!");
+}
