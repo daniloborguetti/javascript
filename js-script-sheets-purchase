@@ -37,11 +37,11 @@ function onEdit(e) {
   var colUTMCampaign     = 19;    
   var colUTMContent      = 20;    
   var colUTMTerm         = 21;    
-  var colFbclid          = 22;    
+  var colFbc             = 22;    
   var colFbp             = 23;   
   var colSourceURL       = 24;   
-  var colClientIP        = 25;   
-  var colClientUserAgent = 26;   
+  var colUserIP          = 25;   
+  var colUserAgent       = 26;   
   var colGclid           = 27;    
   var colWbraid          = 28;    
   var colGbraid          = 29;    
@@ -97,11 +97,11 @@ function onEdit(e) {
       utm_term: dataRow[colUTMTerm - 1]
     },
     ads_parameter: {
-      fbclid: dataRow[colFbclid - 1],
+      fbc: dataRow[colFbclid - 1],
       fbp: dataRow[colFbp - 1],
       source_url: dataRow[colSourceURL - 1],
-      client_ip: dataRow[colClientIP - 1],
-      client_user_agent: dataRow[colClientUserAgent - 1],
+      user_ip: dataRow[colUserIP - 1],
+      user_agent: dataRow[colUserAgent - 1],
       gclid: dataRow[colGclid - 1],
       wbraid: dataRow[colWbraid - 1],
       gbraid: dataRow[colGbraid - 1]
