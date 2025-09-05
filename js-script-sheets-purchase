@@ -1,6 +1,6 @@
-function onEdit(e) {
-  // ID fixo da planilha
-  var sheetId = 'URL DA PLANILHA DE LEADS';
+function handleEdit(e) {
+  // ID fixo da planilha (apenas o ID, não a URL)
+  var sheetId = 'ID DA PLANILHA DE LEADS';
 
   // Nome da aba específica
   var sheetName = 'Leads';
@@ -11,10 +11,15 @@ function onEdit(e) {
   // Seleciona a aba específica
   var sheet = ss.getSheetByName(sheetName);
 
-  // Garante que a edição ocorreu exatamente na aba "Leads" da planilha certa
+  // --- Validações do evento/escopo ---
   if (!e || !e.range) return;
+
+  // Garante que a edição ocorreu exatamente nessa planilha/aba
+  // (em gatilho instalável, e.source.getId() está disponível)
+  if (!e.source || typeof e.source.getId !== 'function') return;
+  if (e.source.getId() !== sheetId) return;
+
   var editedSheet = e.range.getSheet();
-  if (editedSheet.getParent().getId() !== sheetId) return;
   if (editedSheet.getName() !== sheetName) return;
 
   // Pega a linha e a coluna editadas
@@ -73,7 +78,7 @@ function onEdit(e) {
   // Captura todos os dados da linha
   var dataRow = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
 
-  // Estrutura do Payload
+  // Estrutura do Payload (mantido como no seu script atual)
   var payload = {
     event: "Purchase Offline",
     date: dataRow[colData - 1],
@@ -106,8 +111,8 @@ function onEdit(e) {
       fbc: dataRow[colFbc - 1],
       fbp: dataRow[colFbp - 1],
       source_url: dataRow[colSourceURL - 1],
-      user_ip: dataRow[colUserIP - 1],
-      user_agent: dataRow[colUserAgent - 1],
+      client_ip: dataRow[colUserIP - 1],
+      client_user_agent: dataRow[colUserAgent - 1],
       gclid: dataRow[colGclid - 1],
       wbraid: dataRow[colWbraid - 1],
       gbraid: dataRow[colGbraid - 1]
