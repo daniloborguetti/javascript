@@ -11,6 +11,12 @@ function onEdit(e) {
   // Seleciona a aba específica
   var sheet = ss.getSheetByName(sheetName);
 
+  // Garante que a edição ocorreu exatamente na aba "Leads" da planilha certa
+  if (!e || !e.range) return;
+  var editedSheet = e.range.getSheet();
+  if (editedSheet.getParent().getId() !== sheetId) return;
+  if (editedSheet.getName() !== sheetName) return;
+
   // Pega a linha e a coluna editadas
   var range = e.range;
   var row = range.getRow();
