@@ -111,8 +111,8 @@ function handleEdit(e) {
       fbc: dataRow[colFbc - 1],
       fbp: dataRow[colFbp - 1],
       source_url: dataRow[colSourceURL - 1],
-      client_ip: dataRow[colUserIP - 1],
-      client_user_agent: dataRow[colUserAgent - 1],
+      user_ip: dataRow[colUserIP - 1],
+      user_agent: dataRow[colUserAgent - 1],
       gclid: dataRow[colGclid - 1],
       wbraid: dataRow[colWbraid - 1],
       gbraid: dataRow[colGbraid - 1]
