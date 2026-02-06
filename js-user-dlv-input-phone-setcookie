@@ -3,23 +3,32 @@ function () {
   var inputElement = document.querySelector('[id="phone"]');
   var inputPhone = inputElement ? inputElement.value : undefined;
 
+  // Prioriza DLV, fallback para input
   var phonenumber = dlvPhone || inputPhone;
 
-  if (phonenumber && typeof phonenumber === "string" && phonenumber.trim() !== "") {
-    var numeroLimpo = phonenumber.replace(/\D/g, "");
-
-    if (!numeroLimpo.startsWith("55")) {
-      numeroLimpo = "55" + numeroLimpo;
-    }
-
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = "LeadPhone=" + encodeURIComponent(numeroLimpo) +
-                      "; expires=" + expirationDate.toUTCString() +
-                      "; path=/";
-
-    return numeroLimpo;
+  if (phonenumber === null || phonenumber === undefined) {
+    return undefined;
   }
 
-  return null;
+  var numero = String(phonenumber).replace(/\D/g, '');
+
+  // Aceita: 11 dígitos (sem DDI) OU 13 dígitos começando com 55 (com DDI)
+  if (numero.length === 11) {
+    numero = '55' + numero;
+  } else if (numero.length === 13 && numero.indexOf('55') === 0) {
+    // já está com 55
+  } else {
+    return undefined;
+  }
+
+  // Cookie por 30 dias (somente após validação)
+  var expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 30);
+
+  document.cookie =
+    "LeadPhone=" + encodeURIComponent(numero) +
+    "; expires=" + expirationDate.toUTCString() +
+    "; path=/";
+
+  return numero;
 }
