@@ -1,20 +1,21 @@
-function formatPhone() {
-  // Substitua pela variável do seu formulário
+function () {
+  // Seleciona o campo pelo ID
   var phoneInput = document.querySelector('[id="phone"]');
-
-  if (phoneInput) {
-    var phoneValue = phoneInput.value;
-
-    // Remove caracteres não numéricos e espaços
-    var numeroLimpo = phoneValue.replace(/\D/g, '');
-
-    // Adiciona o código do país 55 (Brasil) se necessário
-    if (!numeroLimpo.startsWith('55')) {
-      numeroLimpo = '55' + numeroLimpo;
-    }
-
-    return numeroLimpo;
+  if (!phoneInput || !phoneInput.value) {
+    return undefined;
   }
 
-  return undefined;
+  // Remove caracteres não numéricos
+  var numero = String(phoneInput.value).replace(/\D/g, '');
+
+  // Aceita: 11 dígitos (sem DDI) OU 13 dígitos começando com 55 (com DDI)
+  if (numero.length === 11) {
+    numero = '55' + numero;
+  } else if (numero.length === 13 && numero.indexOf('55') === 0) {
+    // já está com 55
+  } else {
+    return undefined;
+  }
+
+  return numero;
 }
